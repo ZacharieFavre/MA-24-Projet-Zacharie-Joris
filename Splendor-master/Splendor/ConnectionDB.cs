@@ -31,7 +31,7 @@ namespace Splendor
             CreateInsertPlayer();
             //Create and insert cards
             //TO DO
-            CreateInsertCards();
+            CreateInsertCardCost();
             //Create and insert ressources
             //TO DO
             CreateInsertRessources();
@@ -45,25 +45,29 @@ namespace Splendor
         public Stack<Card> GetListCardAccordingToLevel(int level)
         {
             //Get all the data from card table selecting them according to the data
-            //TO DO
+            string sql = "select * from card";
+            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+            SQLiteDataReader reader = command.ExecuteReader();
             //Create an object "Stack of Card"
             Stack<Card> listCard = new Stack<Card>();
             //do while to go to every record of the card table
-            //while (....)
-            //{
-                //Get the ressourceid and the number of prestige points
-                //Create a card object
-                
-                //select the cost of the card : look at the cost table (and other)
-                
-                //do while to go to every record of the card table
-                //while (....)
-                //{
-                    //get the nbRessource of the cost
-                //}
-                //push card into the stack
-                
-            //}
+            while (reader.Read())
+            {
+                reader["id"]
+           
+            //Get the ressourceid and the number of prestige points
+            //Create a card object
+
+            //select the cost of the card : look at the cost table (and other)
+
+            //do while to go to every record of the card table
+                while (reder2.Read())
+                {
+            //get the nbRessource of the cost
+                }
+            //push card into the stack
+
+            }
             return listCard;
         }
 
@@ -136,7 +140,7 @@ namespace Splendor
         /// <summary>
         ///  create tables "card", "cost" and insert data
         /// </summary>
-        private void CreateInsertCards()
+        private void CreateInsertCardCost()
         {
             string sql1 = "CREATE TABLE card (idcard INT PRIMARY KEY, fkRessource INT , level INT, nbPtPrestige INT, fkPlayer INT, FOREIGN KEY (fkRessource) REFERENCES ressources (idRessource), FOREIGN KEY (fkPlayer) REFERENCES player (id))";
             SQLiteCommand command1 = new SQLiteCommand(sql1, m_dbConnection);
