@@ -112,11 +112,152 @@ namespace Splendor
         /// </summary>
         private void CreateInsertRessources()
         {
-            string sql = "CREATE TABLE ressources (idcard INT PRIMARY KEY, fkRessource INT , level INT, nbPtPrestige INT, FOREING KEY(fkRessource) REFERENCES )";
+            string sql = "CREATE TABLE ressources (idRessource INT PRIMARY KEY)";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
 
             string[] sqlRess =
+            {
+                "insert into ressources(idRessource) values (1)",
+                "insert into ressources(idRessource) values (2)",
+                "insert into ressources(idRessource) values (3)",
+                "insert into ressources(idRessource) values (4)",
+                "insert into ressources(idRessource) values (5)"
+            };
+        
+
+            foreach (string valeurs in sqlRess)
+            {
+                SQLiteCommand command1 = new SQLiteCommand(valeurs, m_dbConnection);
+                command1.ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
+        ///  create tables "card", "cost" and insert data
+        /// </summary>
+        private void CreateInsertCards()
+        {
+            string sql1 = "CREATE TABLE card (idcard INT PRIMARY KEY, fkRessource INT , level INT, nbPtPrestige INT, fkPlayer INT, FOREIGN KEY (fkRessource) REFERENCES ressources (idRessource), FOREIGN KEY (fkPlayer) REFERENCES player (id))";
+            SQLiteCommand command1 = new SQLiteCommand(sql1, m_dbConnection);
+            command1.ExecuteNonQuery();
+
+
+            string[] sqlCard = {
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(2, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(3, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(4, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(5, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(6, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(7, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(8, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(9, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(10, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(11, 0, 4, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(12, 4, 3, 5)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(13, 3, 3, 5)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(14, 2, 3, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(15, 5, 3, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(16, 1, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(17, 2, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(18, 5, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(19, 5, 3, 5)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(20, 1, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(21, 4, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(22, 2, 3, 5)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(23, 3, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(24, 1, 3, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(25, 4, 3, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(26, 2, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(27, 3, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(28, 4, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(29, 1, 3, 5)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(30, 5, 3, 4)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(31, 3, 3, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(32, 5, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(33, 1, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(34, 5, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(35, 5, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(36, 5, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(37, 2, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(38, 4, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(39, 4, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(40, 2, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(41, 2, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(42, 3, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(43, 1, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(44, 5, 2, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(45, 4, 2, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(46, 2, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(47, 3, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(48, 1, 2, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(49, 4, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(50, 3, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(51, 2, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(52, 4, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(53, 1, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(54, 1, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(55, 3, 2, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(56, 4, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(57, 3, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(58, 1, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(59, 5, 2, 2)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(60, 2, 2, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(61, 3, 2, 3)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(62, 3, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(63, 2, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(64, 1, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(65, 5, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(66, 4, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(67, 5, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(68, 5, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(69, 5, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(70, 5, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(71, 5, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(72, 5, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(73, 5, 1, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(74, 1, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(75, 1, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(76, 1, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(77, 1, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(78, 1, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(79, 1, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(80, 1, 1, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(81, 3, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(82, 3, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(83, 3, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(84, 3, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(85, 3, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(86, 3, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(87, 3, 1, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(88, 4, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(89, 4, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(90, 4, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(91, 4, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(92, 4, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(93, 4, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(94, 4, 1, 1)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(95, 2, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(96, 2, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(97, 2, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(98, 2, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(99, 2, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(100, 2, 1, 0)",
+                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(101, 2, 1, 1)"
+             };
+
+            foreach (string valeurs in sqlCard)
+            {
+                SQLiteCommand command2 = new SQLiteCommand(valeurs, m_dbConnection);
+                command2.ExecuteNonQuery();
+            }
+
+
+            string sql2 = "CREATE TABLE cost (idCost INT PRIMARY KEY, fkCard INT, fkRessource INT, nbRessource INT, FOREIGN KEY (fkCard) REFERENCES card (idcard), FOREIGN KEY (fkRessource) REFERENCES ressources (idRessource))";
+            SQLiteCommand command3 = new SQLiteCommand(sql2, m_dbConnection);
+            command3.ExecuteNonQuery();
+
+            string[] sqlCost =
             {
                 "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (3, 3,1,4)",
                 "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (6, 6,1,4)",
@@ -359,133 +500,13 @@ namespace Splendor
                 "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (539, 99,5,2)",
                 "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (540, 100,5,1)"
             };
-        
 
-            foreach (string valeurs in sqlRess)
+            foreach (string valeurs in sqlCost)
             {
-                SQLiteCommand command = new SQLiteCommand(valeurs, m_dbConnection);
-                command.ExecuteNonQuery();
+                SQLiteCommand command4 = new SQLiteCommand(valeurs, m_dbConnection);
+                command4.ExecuteNonQuery();
             }
-        }
 
-        /// <summary>
-        ///  create tables "cards", "cost" and insert data
-        /// </summary>
-        private void CreateInsertCards()
-        {
-            string sql = "CREATE TABLE ressources (idcard INT PRIMARY KEY, fkRessource INT , level INT, nbPtPrestige INT, FOREING KEY(fkRessource) REFERENCES )";
-            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
-            command.ExecuteNonQuery();
-
-
-            string[] sqlcard = {
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(2, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(3, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(4, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(5, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(6, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(7, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(8, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(9, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(10, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(11, 0, 4, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(12, 4, 3, 5)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(13, 3, 3, 5)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(14, 2, 3, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(15, 5, 3, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(16, 1, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(17, 2, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(18, 5, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(19, 5, 3, 5)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(20, 1, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(21, 4, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(22, 2, 3, 5)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(23, 3, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(24, 1, 3, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(25, 4, 3, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(26, 2, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(27, 3, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(28, 4, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(29, 1, 3, 5)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(30, 5, 3, 4)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(31, 3, 3, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(32, 5, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(33, 1, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(34, 5, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(35, 5, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(36, 5, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(37, 2, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(38, 4, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(39, 4, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(40, 2, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(41, 2, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(42, 3, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(43, 1, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(44, 5, 2, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(45, 4, 2, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(46, 2, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(47, 3, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(48, 1, 2, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(49, 4, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(50, 3, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(51, 2, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(52, 4, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(53, 1, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(54, 1, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(55, 3, 2, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(56, 4, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(57, 3, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(58, 1, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(59, 5, 2, 2)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(60, 2, 2, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(61, 3, 2, 3)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(62, 3, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(63, 2, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(64, 1, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(65, 5, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(66, 4, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(67, 5, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(68, 5, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(69, 5, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(70, 5, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(71, 5, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(72, 5, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(73, 5, 1, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(74, 1, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(75, 1, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(76, 1, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(77, 1, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(78, 1, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(79, 1, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(80, 1, 1, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(81, 3, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(82, 3, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(83, 3, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(84, 3, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(85, 3, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(86, 3, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(87, 3, 1, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(88, 4, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(89, 4, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(90, 4, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(91, 4, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(92, 4, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(93, 4, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(94, 4, 1, 1)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(95, 2, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(96, 2, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(97, 2, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(98, 2, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(99, 2, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(100, 2, 1, 0)",
-                "insert into card(idcard, fkRessource, level, nbPtPrestige) values(101, 2, 1, 1)"
-             };
-
-            foreach (string valeurs in sqlcard)
-            {
-                SQLiteCommand command = new SQLiteCommand(valeurs, m_dbConnection);
-                command.ExecuteNonQuery();
-            }
         }
 
     }
