@@ -36,16 +36,22 @@ namespace Splendor
             //TO DO
             CreateInsertRessources();
         }
-
-
+        
         /// <summary>
         /// get the list of cards according to the level
         /// </summary>
         /// <returns>cards stack</returns>
         public Stack<Card> GetListCardAccordingToLevel(int level)
         {
+            /*
+            Card card11 = new Card();
+            card11.Level = 1;
+            card11.PrestigePt = 1;
+            card11.Cout = new int[] { 1, 0, 2, 0, 2 };
+            card11.Ress = Ressources.Rubis;
+            */
             //Get all the data from card table selecting them according to the data
-            string sql = "select * from card";
+            string sql = "select * from card where level = " + level;
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
             //Create an object "Stack of Card"
@@ -53,20 +59,60 @@ namespace Splendor
             //do while to go to every record of the card table
             while (reader.Read())
             {
-                reader["id"]
-           
-            //Get the ressourceid and the number of prestige points
-            //Create a card object
+                Card card = new Card();
 
-            //select the cost of the card : look at the cost table (and other)
-
-            //do while to go to every record of the card table
-                while (reder2.Read())
+                //Get the ressourceid and the number of prestige points
+                switch (reader["fkRessource"])
                 {
-            //get the nbRessource of the cost
-                }
-            //push card into the stack
+                    case 1:
+                        card.Ress = Ressources.Rubis;
+                        break;
 
+                    case 2:
+                        card.Ress = Ressources.Emeraude;
+                        break;
+
+                    case 3:
+                        card.Ress = Ressources.Onyx;
+                        break;
+
+                    case 4:
+                        card.Ress = Ressources.Saphir;
+                        break;
+
+                    case 5:
+                        card.Ress = Ressources.Diamand;
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+                card.PrestigePt = (int)reader["nbPtPrestige"];
+                card.Level = (int)reader["level"];
+                //Create a card object
+
+                //select the cost of the card : look at the cost table (and other)
+                string sql2 = "select * from cost";
+                SQLiteCommand command2 = new SQLiteCommand(sql2, m_dbConnection);
+                SQLiteDataReader readercost = command.ExecuteReader();
+
+                //initialiser la card.cout
+                card.Cout = new int[] { 0, 0, 0, 0, 0 };
+                //do while to go to every record of the card table
+                while (readercost.Read())
+                {
+                    if (readercost["fkCard"] == reader["idcard"])
+                    {
+
+                        //get the nbRessource of the cost
+                        card.Cout[(int)readercost["fkRessource"]-1] = (int)readercost["nbRessource"];
+                    }
+                }
+
+                //push card into the stack
+                listCard.Push(card);
             }
             return listCard;
         }
