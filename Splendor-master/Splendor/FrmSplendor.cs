@@ -67,6 +67,62 @@ namespace Splendor
             conn = new ConnectionDB();
 
             //load cards from the database
+            Stack<Card> listCardOne = conn.GetListCardAccordingToLevel(1);
+            Stack<Card> listCardTwo = conn.GetListCardAccordingToLevel(2);
+            Stack<Card> listCardTree = conn.GetListCardAccordingToLevel(3);
+            Stack<Card> listCardFor = conn.GetListCardAccordingToLevel(4);
+
+            //Afficher les cartes de level 1
+            int nbDataInStack1 = listCardOne.Count;
+            int i1 = 0;
+            foreach (Control ctrl in flwCardLevel1.Controls)
+            {
+                if (i1 < nbDataInStack1)
+                {
+                    ctrl.Text = listCardOne.Pop().ToString();
+                    i1++;
+                }
+
+            }
+
+            //afficher les cartes de level 2
+            int nbDataInStack2 = listCardTwo.Count;
+            int i2 = 0;
+            foreach (Control ctrl in flwCardLevel2.Controls)
+            {
+                if (i2 < nbDataInStack2)
+                {
+                    ctrl.Text = listCardTwo.Pop().ToString();
+                    i2++;
+                }
+
+            }
+
+            //afficher les cartes de level 3
+            int nbDataInStack3 = listCardTree.Count;
+            int i3 = 0;
+            foreach (Control ctrl in flwCardLevel3.Controls)
+            {
+                if (i3 < nbDataInStack3)
+                {
+                    ctrl.Text = listCardTree.Pop().ToString();
+                    i3++;
+                }
+
+            }
+
+            //afficher les cartes de level 4
+            int nbDataInStack4 = listCardFor.Count;
+            int i4 = 0;
+            foreach (Control ctrl in flwCardNoble.Controls)
+            {
+                if (i4 < nbDataInStack4)
+                {
+                    ctrl.Text = listCardFor.Pop().ToString();
+                    i4++;
+                }
+
+            }
             //they are not hard coded any more
             //TO DO
 
@@ -86,10 +142,10 @@ namespace Splendor
             txtLevel12.Text = card12.ToString();
 
             //load cards from the database
-            Stack<Card> listCardOne = conn.GetListCardAccordingToLevel(1);
+            
             //Go through the results
             //Don't forget to check when you are at the end of the stack
-            
+
             //fin TO DO
 
             this.Width = 680;
@@ -106,8 +162,29 @@ namespace Splendor
             cmdNextPlayer.Visible = false;
 
             //we wire the click on all cards to the same event
-            //TO DO for all cards
+            //display the iformation of the card for the level 1
             txtLevel11.Click += ClickOnCard;
+            txtLevel12.Click += ClickOnCard;
+            txtLevel13.Click += ClickOnCard;
+            txtLevel14.Click += ClickOnCard;
+
+            //display the iformation of the card for the level 2
+            txtLevel21.Click += ClickOnCard;
+            txtLevel22.Click += ClickOnCard;
+            txtLevel23.Click += ClickOnCard;
+            txtLevel24.Click += ClickOnCard;
+
+            //display the iformation of the card for the level 3
+            txtLevel31.Click += ClickOnCard;
+            txtLevel32.Click += ClickOnCard;
+            txtLevel33.Click += ClickOnCard;
+            txtLevel34.Click += ClickOnCard;
+
+            //display the iformation of the card for the level 4
+            txtNoble1.Click += ClickOnCard;
+            txtNoble2.Click += ClickOnCard;
+            txtNoble3.Click += ClickOnCard;
+            txtNoble4.Click += ClickOnCard;
         }
 
         private void ClickOnCard(object sender, EventArgs e)
@@ -115,6 +192,9 @@ namespace Splendor
             //We get the value on the card and we split it to get all the values we need (number of prestige points and ressource)
             //Enable the button "Validate"
             //TO DO
+            TextBox txtBox = sender as TextBox;
+            //get the text displayed in the textbox that has been clicked
+            MessageBox.Show(txtBox.Text);
         }
 
         /// <summary>
