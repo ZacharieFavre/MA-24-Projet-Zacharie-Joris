@@ -46,6 +46,7 @@ namespace Splendor
             //Get all the data from card table selecting them according to the data
             string sql = "select * from card where level = " + level;
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+            command.ExecuteNonQuery();
             SQLiteDataReader reader = command.ExecuteReader();
             //Create an object "Stack of Card"
             Stack<Card> listCard = new Stack<Card>();
@@ -86,8 +87,9 @@ namespace Splendor
                 //Create a card object
 
                 //select the cost of the card : look at the cost table (and other)
-                string sql2 = "select * from cost";
+                string sql2 = "select * from cost where fkCard = " + reader["idcard"];
                 SQLiteCommand command2 = new SQLiteCommand(sql2, m_dbConnection);
+                command2.ExecuteNonQuery();
                 SQLiteDataReader readercost = command2.ExecuteReader();
 
                 //initialiser la card.cout
@@ -95,11 +97,10 @@ namespace Splendor
                 //do while to go to every record of the card table
                 while (readercost.Read())
                 {
-                    if (readercost["fkCard"] == reader["idcard"])
-                    {
-                        //get the nbRessource of the cost
-                        card.Cout[(int)readercost["fkRessource"]-1] = (int)readercost["nbRessource"];
-                    }
+
+                    //get the nbRessource of the cost
+                    card.Cout[(int)readercost["fkRessource"]-1] = (int)readercost["nbRessource"];
+
                 }
 
                 //push card into the stack
@@ -300,38 +301,38 @@ namespace Splendor
 
             string[] sqlCost =
             {
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (3, 3,1,4)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (6, 6,1,4)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (7, 7,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (9, 9,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (11, 11,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (13, 13,1,7)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (14, 14,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (15, 15,1,5)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (16, 16,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (23, 23,1,7)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (25, 25,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (27, 27,1,6)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (29, 29,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (30, 30,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (31, 31,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (32, 32,1,5)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (33, 33,1,2)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (34, 34,1,2)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (35, 35,1,4)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (36, 36,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (38, 38,1,1)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (39, 39,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (42, 42,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (48, 48,1,6)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (51, 51,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (53, 53,1,2)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (57, 57,1,2)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (59, 59,1,5)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (62, 62,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (63, 63,1,3)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (64, 64,1,1)",
-                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (66, 66,1,2)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (3,3,1,4)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (6,6,1,4)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (7,7,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (9,9,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (11,11,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (13,13,1,7)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (14,14,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (15,15,1,5)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (16,16,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (23,23,1,7)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (25,25,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (27,27,1,6)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (29,29,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (30,30,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (31,31,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (32,32,1,5)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (33,33,1,2)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (34,34,1,2)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (35,35,1,4)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (36,36,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (38,38,1,1)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (39,39,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (42,42,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (48,48,1,6)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (51,51,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (53,53,1,2)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (57,57,1,2)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (59,59,1,5)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (62,62,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (63,63,1,3)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (64,64,1,1)",
+                "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (66,66,1,2)",
                 "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (67, 67,1,2)",
                 "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (70, 70,1,1)",
                 "insert into cost(idCost, fkCard, fkRessource, nbRessource) values (72, 72,1,1)",
