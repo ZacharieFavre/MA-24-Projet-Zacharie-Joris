@@ -33,7 +33,8 @@ namespace Splendor
         private int nbEmeraude;
         private int nbDiamand;
         private int nbSaphir;
-        private int nbPlayer=1;
+        public int nbPlayer=1;
+        public string[] player;
 
         //id of the player that is playing
         private int currentPlayerId;
@@ -65,7 +66,7 @@ namespace Splendor
             lblRubisCoin.Text = "7";
             lblSaphirCoin.Text = "7";
 
-            conn = new ConnectionDB();
+            conn = new ConnectionDB(player);
 
             //load cards from the database
             //they are not hard coded any more
@@ -142,7 +143,7 @@ namespace Splendor
         private void LoadPlayer(int id) { 
 
             enableClicLabel = true;
-
+            
             string name = conn.GetPlayerName(currentPlayerId);
 
             //no coins or card selected yet, labels are empty
@@ -442,16 +443,15 @@ namespace Splendor
             }
             else if(nbPlayer<4)
             {
+                /// il faudrait faire un sous programe qui renvoie le nom du joueur !
                 nbPlayer++;
-                FrmPlName Name = new FrmPlName();
-                Name.Show();
                 cmdDeletePlayer.Enabled = true;
 
                 
                 lblNbPlayer.Text = nbPlayer.ToString();
             }
         }
-
+   
         /// <summary>
         /// click on the next player to tell him it is his turn
         /// </summary>
@@ -480,6 +480,107 @@ namespace Splendor
                 
                 lblNbPlayer.Text = nbPlayer.ToString();
             }
+        }
+
+        private void lblChoiceRubis_Click(object sender, EventArgs e)
+        {
+            if (nbRubis==0)
+            {
+                lblChoiceRubis.Visible = false;
+                if (nbSaphir == 0 && nbEmeraude == 0 && nbOnyx == 0 && nbDiamand == 0)
+                {
+                    cmdValidateChoice.Visible = false;
+                }
+            }
+            else
+            {
+                nbRubis--;
+                int var = Convert.ToInt32(lblRubisCoin.Text) + 1;
+                lblRubisCoin.Text = var.ToString();
+                lblChoiceRubis.Text = nbRubis + "\r\n";
+            }
+        }
+
+        private void lblChoiceSaphir_Click(object sender, EventArgs e)
+        {
+            if (nbSaphir == 0)
+            {
+                lblChoiceSaphir.Visible = false;
+                if (nbRubis == 0 && nbEmeraude == 0 && nbOnyx == 0 && nbDiamand == 0)
+                {
+                    cmdValidateChoice.Visible = false;
+                }
+            }
+            else
+            {
+                nbSaphir--;
+                int var = Convert.ToInt32(lblSaphirCoin.Text) + 1;
+                lblSaphirCoin.Text = var.ToString();
+                lblChoiceSaphir.Text = nbSaphir + "\r\n";
+            }
+        }
+
+        private void lblChoiceOnyx_Click(object sender, EventArgs e)
+        {
+            if (nbOnyx == 0)
+            {
+                lblChoiceOnyx.Visible = false;
+                if (nbRubis == 0 && nbEmeraude == 0 && nbSaphir == 0 && nbDiamand == 0)
+                {
+                    cmdValidateChoice.Visible = false;
+                }
+            }
+            else
+            {
+                nbOnyx--;
+                int var = Convert.ToInt32(lblOnyxCoin.Text) + 1;
+                lblOnyxCoin.Text = var.ToString();
+                lblChoiceOnyx.Text = nbOnyx + "\r\n";
+            }
+        }
+
+        private void lblChoiceEmeraude_Click(object sender, EventArgs e)
+        {
+            if (nbEmeraude == 0)
+            {
+                lblChoiceEmeraude.Visible = false;
+                if (nbRubis == 0 && nbOnyx == 0 && nbSaphir == 0 && nbDiamand == 0)
+                {
+                    cmdValidateChoice.Visible = false;
+                }
+            }
+            else
+            {
+                nbEmeraude--;
+                int var = Convert.ToInt32(lblEmeraudeCoin.Text) + 1;
+                lblEmeraudeCoin.Text = var.ToString();
+                lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
+            }
+        }
+
+        private void lblChoiceDiamand_Click(object sender, EventArgs e)
+        {
+            if (nbDiamand == 0)
+            {
+                lblChoiceDiamand.Visible = false;
+                if (nbRubis == 0 && nbOnyx == 0 && nbSaphir == 0 && nbEmeraude == 0)
+                {
+                    cmdValidateChoice.Visible = false;
+                }
+            }
+            else
+            {
+                nbDiamand--;
+                int var = Convert.ToInt32(lblDiamandCoin.Text) + 1;
+                lblDiamandCoin.Text = var.ToString();
+                lblChoiceDiamand.Text = nbDiamand + "\r\n";
+            }
+        }
+
+        private void cmdvalname_Click(object sender, EventArgs e)
+        {
+            string Name = txtName.Text;
+            player[nbPlayer] = Name;
         }
     }
 }
