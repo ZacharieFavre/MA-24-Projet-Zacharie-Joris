@@ -19,7 +19,7 @@ namespace Splendor
         /// <summary>
         /// constructor : creates the connection to the database SQLite
         /// </summary>
-        public ConnectionDB(string[] name)
+        public ConnectionDB()
         {
 
             SQLiteConnection.CreateFile("Splendor.sqlite");
@@ -28,7 +28,7 @@ namespace Splendor
             m_dbConnection.Open();
 
             //create and insert players
-            CreateInsertPlayer(name);
+            CreateInsertPlayer();
             //Create and insert cards
             //TO DO
             CreateInsertCards();
@@ -71,18 +71,24 @@ namespace Splendor
         /// <summary>
         /// create the "player" table and insert data
         /// </summary>
-        private void CreateInsertPlayer(string[] name)
+        private void CreateInsertPlayer()
         {
             string sql = "CREATE TABLE if not exists player (id INT PRIMARY KEY, pseudo VARCHAR(20))";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
-
-            sql = "insert into player (pseudo) values ('"+name[1]+"')";
+            sql = "insert into player (id, pseudo) values (0, 'Fred')";
             command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
+            sql = "insert into player (id, pseudo) values (1, 'Harry')";
+            command = new SQLiteCommand(sql, m_dbConnection);
+            command.ExecuteNonQuery();
+            sql = "insert into player (id, pseudo) values (2, 'Sam')";
+            command = new SQLiteCommand(sql, m_dbConnection);
+            command.ExecuteNonQuery();
+
         }
 
-        
+
         /// <summary>
         /// get the name of the player according to his id
         /// </summary>

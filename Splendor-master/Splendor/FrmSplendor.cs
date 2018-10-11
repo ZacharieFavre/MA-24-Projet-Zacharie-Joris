@@ -33,8 +33,16 @@ namespace Splendor
         private int nbEmeraude;
         private int nbDiamand;
         private int nbSaphir;
-        public int nbPlayer=1;
-        public string[] player;
+        public int nbPlayer = 1;
+
+        IList<Player> playerList = new List<Player>()
+        {
+            new Player(){ Name = "Joueur 1", Id = 1, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }},
+            new Player(){ Name = "Joueur 2", Id = 2, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }},
+            new Player(){ Name = "Joueur 3", Id = 3, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }},
+            new Player(){ Name = "Joueur 4", Id = 4, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }}
+        };
+
 
         //id of the player that is playing
         private int currentPlayerId;
@@ -66,7 +74,7 @@ namespace Splendor
             lblRubisCoin.Text = "7";
             lblSaphirCoin.Text = "7";
 
-            conn = new ConnectionDB(player);
+            conn = new ConnectionDB();
 
             //load cards from the database
             //they are not hard coded any more
@@ -143,8 +151,8 @@ namespace Splendor
         private void LoadPlayer(int id) { 
 
             enableClicLabel = true;
-            
-            string name = conn.GetPlayerName(currentPlayerId);
+
+            string name = playerList[id].Name;
 
             //no coins or card selected yet, labels are empty
             lblChoiceDiamand.Text = "";
@@ -166,7 +174,7 @@ namespace Splendor
             player.Name = name;
             player.Id = id;
             player.Ressources = new int[] { 2, 0, 1, 1, 1 };
-            player.Coins = new int[] { 0, 0, 0, 0, 0 };
+            player.Coins = new int[] { 0,0,0,0,0 };
 
             lblPlayerDiamandCoin.Text = player.Coins[0].ToString();
             lblPlayerOnyxCoin.Text = player.Coins[1].ToString();
@@ -575,12 +583,6 @@ namespace Splendor
                 lblDiamandCoin.Text = var.ToString();
                 lblChoiceDiamand.Text = nbDiamand + "\r\n";
             }
-        }
-
-        private void cmdvalname_Click(object sender, EventArgs e)
-        {
-            string Name = txtName.Text;
-            player[nbPlayer] = Name;
         }
     }
 }
