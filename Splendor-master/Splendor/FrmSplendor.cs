@@ -33,6 +33,7 @@ namespace Splendor
         private int nbEmeraude;
         private int nbDiamand;
         private int nbSaphir;
+        private int idPlayer;
 
         //id of the player that is playing
         private int currentPlayerId;
@@ -77,6 +78,7 @@ namespace Splendor
             int i1 = 0;
             foreach (Control ctrl in flwCardLevel1.Controls)
             {
+                //check when you are at the end of the stack
                 if (i1 < nbDataInStack1)
                 {
                     ctrl.Text = listCardOne.Pop().ToString();
@@ -90,6 +92,7 @@ namespace Splendor
             int i2 = 0;
             foreach (Control ctrl in flwCardLevel2.Controls)
             {
+                //check when you are at the end of the stack
                 if (i2 < nbDataInStack2)
                 {
                     ctrl.Text = listCardTwo.Pop().ToString();
@@ -103,6 +106,7 @@ namespace Splendor
             int i3 = 0;
             foreach (Control ctrl in flwCardLevel3.Controls)
             {
+                //check when you are at the end of the stack
                 if (i3 < nbDataInStack3)
                 {
                     ctrl.Text = listCardTree.Pop().ToString();
@@ -116,6 +120,7 @@ namespace Splendor
             int i4 = 0;
             foreach (Control ctrl in flwCardNoble.Controls)
             {
+                //check when you are at the end of the stack
                 if (i4 < nbDataInStack4)
                 {
                     ctrl.Text = listCardFor.Pop().ToString();
@@ -123,30 +128,7 @@ namespace Splendor
                 }
 
             }
-            //they are not hard coded any more
-            //TO DO
 
-            Card card11 = new Card();
-            card11.Level = 1;
-            card11.PrestigePt = 1;
-            card11.Cout = new int[] { 1, 0, 2, 0, 2 };
-            card11.Ress = Ressources.Rubis;
-
-            Card card12 = new Card();
-            card12.Level = 1;
-            card12.PrestigePt = 0;
-            card12.Cout = new int[] { 0, 1, 2, 1, 0 };
-            card12.Ress = Ressources.Saphir;
-
-            txtLevel11.Text = card11.ToString();
-            txtLevel12.Text = card12.ToString();
-
-            //load cards from the database
-            
-            //Go through the results
-            //Don't forget to check when you are at the end of the stack
-
-            //fin TO DO
 
             this.Width = 680;
             this.Height = 540;
@@ -191,7 +173,8 @@ namespace Splendor
         {
             //We get the value on the card and we split it to get all the values we need (number of prestige points and ressource)
             //Enable the button "Validate"
-            //TO DO
+
+
             TextBox txtBox = sender as TextBox;
             //get the text displayed in the textbox that has been clicked
             MessageBox.Show(txtBox.Text);
@@ -207,9 +190,9 @@ namespace Splendor
             this.Width = 680;
             this.Height = 780;
 
-            int id = 0;
+            idPlayer = 0;
            
-            LoadPlayer(id);
+            LoadPlayer(idPlayer);
 
         }
 
@@ -349,8 +332,16 @@ namespace Splendor
             //TO DO in release 1.0 : 3 is hard coded (number of players for the game), it shouldn't. 
             //TO DO Get the id of the player : in release 0.1 there are only 3 players
             //Reload the data of the player
+
             //We are not allowed to click on the next button
-            
+            idPlayer++;
+            if (idPlayer < nbplayer)
+            {
+                idPlayer = 0;
+            }
+            cmdNextPlayer.Visible = false;
+            LoadPlayer(idPlayer);
+
         }
 
     }

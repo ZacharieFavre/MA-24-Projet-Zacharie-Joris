@@ -9,7 +9,6 @@ namespace Splendor
 {
     /// <summary>
     /// contains methods and attributes to connect and deal with the database
-    /// TO DO : le modèle de données n'est pas super, à revoir!!!!
     /// </summary>
     class ConnectionDB
     {
