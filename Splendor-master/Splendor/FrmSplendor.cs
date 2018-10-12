@@ -34,6 +34,8 @@ namespace Splendor
         private int nbDiamand;
         private int nbSaphir;
         public int nbPlayer = 1;
+        public int id = 0;
+
 
         IList<Player> playerList = new List<Player>()
         {
@@ -137,7 +139,6 @@ namespace Splendor
             this.Width = 680;
             this.Height = 780;
 
-            int id = 0;
            
             LoadPlayer(id);
 
@@ -163,24 +164,17 @@ namespace Splendor
 
             lblChoiceCard.Text = "";
 
-            //no coins selected
-            nbDiamand = 0;
-            nbOnyx = 0;
-            nbRubis = 0;
-            nbSaphir = 0;
-            nbEmeraude = 0;
-
             Player player = new Player();
-            player.Name = name;
-            player.Id = id;
-            player.Ressources = new int[] { 2, 0, 1, 1, 1 };
-            player.Coins = new int[] { 0,0,0,0,0 };
+            playerList[id].Name = name;
+            playerList[id].Id = id;
+            playerList[id].Ressources = new int[] { 2, 0, 1, 1, 1 };
+            playerList[id].Coins = new int[] { nbRubis,nbSaphir,nbOnyx,nbEmeraude,nbDiamand };
 
-            lblPlayerDiamandCoin.Text = player.Coins[0].ToString();
-            lblPlayerOnyxCoin.Text = player.Coins[1].ToString();
-            lblPlayerRubisCoin.Text = player.Coins[2].ToString();
-            lblPlayerSaphirCoin.Text = player.Coins[3].ToString();
-            lblPlayerEmeraudeCoin.Text = player.Coins[4].ToString();
+            lblPlayerRubisCoin.Text = playerList[id].Coins[0].ToString();
+            lblPlayerSaphirCoin.Text = playerList[id].Coins[1].ToString();
+            lblPlayerOnyxCoin.Text = playerList[id].Coins[2].ToString();
+            lblPlayerEmeraudeCoin.Text = playerList[id].Coins[3].ToString();
+            lblPlayerDiamandCoin.Text = playerList[id].Coins[4].ToString();
             currentPlayerId = id;
 
             lblPlayer.Text = "Jeu de " + name;
@@ -228,6 +222,8 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblRubisCoin.Text) - 1;
                                 lblRubisCoin.Text = var.ToString();
                                 lblChoiceRubis.Text = nbRubis + "\r\n";
+                                playerList[id].Coins[0] = nbRubis;
+
                             }
                         }
                     }
@@ -275,6 +271,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblSaphirCoin.Text) - 1;
                                 lblSaphirCoin.Text = var.ToString();
                                 lblChoiceSaphir.Text = nbSaphir + "\r\n";
+                                playerList[id].Coins[1] = nbSaphir;
                             }
                         }
                     }
@@ -321,6 +318,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblOnyxCoin.Text) - 1;
                                 lblOnyxCoin.Text = var.ToString();
                                 lblChoiceOnyx.Text = nbOnyx + "\r\n";
+                                playerList[id].Coins[2] = nbOnyx;
                             }
                         }
                     }
@@ -368,6 +366,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblEmeraudeCoin.Text) - 1;
                                 lblEmeraudeCoin.Text = var.ToString();
                                 lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
+                                playerList[id].Coins[3] = nbEmeraude;
                             }
                         }
                     }
@@ -416,6 +415,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblDiamandCoin.Text) - 1;
                                 lblDiamandCoin.Text = var.ToString();
                                 lblChoiceDiamand.Text = nbDiamand + "\r\n";
+                                playerList[id].Coins[4] = nbDiamand;
                             }
                         }
                     }
