@@ -114,10 +114,9 @@ namespace Splendor
         /// </summary>
         private void CreateInsertPlayer()
         {
-            string sql = "CREATE TABLE player (id INT PRIMARY KEY, pseudo VARCHAR(20))";
+            string sql = "CREATE TABLE if not exists player (id INT PRIMARY KEY, pseudo VARCHAR(20))";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
-
             sql = "insert into player (id, pseudo) values (0, 'Fred')";
             command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
@@ -127,9 +126,10 @@ namespace Splendor
             sql = "insert into player (id, pseudo) values (2, 'Sam')";
             command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
+
         }
 
-        
+
         /// <summary>
         /// get the name of the player according to his id
         /// </summary>
