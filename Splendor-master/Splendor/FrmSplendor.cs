@@ -34,6 +34,7 @@ namespace Splendor
         private int nbDiamand;
         private int nbSaphir;
         private int idPlayer;
+        private string CardSelected;
 
         //id of the player that is playing
         private int currentPlayerId;
@@ -178,6 +179,9 @@ namespace Splendor
             TextBox txtBox = sender as TextBox;
             //get the text displayed in the textbox that has been clicked
             MessageBox.Show(txtBox.Text);
+            CardSelected = txtBox.Text;
+            txtPlayerBookedCard.Text = txtBox.Text;
+            cmdValidateChoice.Visible = true;
         }
 
         /// <summary>
@@ -206,7 +210,8 @@ namespace Splendor
             enableClicLabel = true;
 
             string name = conn.GetPlayerName(currentPlayerId);
-
+            CardSelected = null;
+            txtPlayerBookedCard.Text = null;
             //no coins or card selected yet, labels are empty
             lblChoiceDiamand.Text = "";
             lblChoiceOnyx.Text = "";
@@ -250,6 +255,8 @@ namespace Splendor
         {
             if (enableClicLabel)
             {
+                CardSelected = null;
+                txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceRubis.Visible = true;
                 //TO DO check if possible to choose a coin, update the number of available coin
@@ -308,8 +315,11 @@ namespace Splendor
         {
             cmdNextPlayer.Visible = true;
             //TO DO Check if card or coins are selected, impossible to do both at the same time
+            if ((nbDiamand != 0)||(nbOnyx != 0)||(nbRubis != 0)||(nbSaphir != 0)||(nbEmeraude != 0)||(CardSelected != null))
+            {
+                cmdNextPlayer.Enabled = true;
+            }
             
-            cmdNextPlayer.Enabled = true;
         }
 
         /// <summary>
@@ -332,14 +342,15 @@ namespace Splendor
             //TO DO in release 1.0 : 3 is hard coded (number of players for the game), it shouldn't. 
             //TO DO Get the id of the player : in release 0.1 there are only 3 players
             //Reload the data of the player
-
+            int nbPlayer = 3;
             //We are not allowed to click on the next button
             idPlayer++;
-            if (idPlayer < nbplayer)
+            if (idPlayer < nbPlayer)
             {
                 idPlayer = 0;
             }
             cmdNextPlayer.Visible = false;
+            
             LoadPlayer(idPlayer);
 
         }
