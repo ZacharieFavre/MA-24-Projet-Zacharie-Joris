@@ -41,7 +41,12 @@ namespace Splendor
         //boolean to enable us to know if the user can click on a coin or a card
         private bool enableClicLabel;
         //connection to the database
-        private ConnectionDB conn;
+        private static ConnectionDB conn = new ConnectionDB();
+        //load cards from the database
+        Stack<Card> listCardOne = conn.GetListCardAccordingToLevel(1);
+        Stack<Card> listCardTwo = conn.GetListCardAccordingToLevel(2);
+        Stack<Card> listCardTree = conn.GetListCardAccordingToLevel(3);
+        Stack<Card> listCardFor = conn.GetListCardAccordingToLevel(4);
 
         /// <summary>
         /// constructor
@@ -66,13 +71,7 @@ namespace Splendor
             lblRubisCoin.Text = "7";
             lblSaphirCoin.Text = "7";
 
-            conn = new ConnectionDB();
 
-            //load cards from the database
-            Stack<Card> listCardOne = conn.GetListCardAccordingToLevel(1);
-            Stack<Card> listCardTwo = conn.GetListCardAccordingToLevel(2);
-            Stack<Card> listCardTree = conn.GetListCardAccordingToLevel(3);
-            Stack<Card> listCardFor = conn.GetListCardAccordingToLevel(4);
 
             //Afficher les cartes de level 1
             int nbDataInStack1 = listCardOne.Count;
@@ -342,6 +341,8 @@ namespace Splendor
             //TO DO in release 1.0 : 3 is hard coded (number of players for the game), it shouldn't. 
             //TO DO Get the id of the player : in release 0.1 there are only 3 players
             //Reload the data of the player
+
+            //a enlever
             int nbPlayer = 3;
             //We are not allowed to click on the next button
             idPlayer++;
@@ -349,6 +350,63 @@ namespace Splendor
             {
                 idPlayer = 0;
             }
+            if (CardSelected != null)
+            {
+                int nbCardStack1 = listCardOne.Count;
+                int if1 = 0;
+                foreach (Control allCard in flwCardLevel1.Controls)
+                {
+                    if (if1 < nbCardStack1)
+                    {
+                        if (CardSelected == allCard.Text)
+                        {
+                            allCard.Text = listCardOne.Pop().ToString();
+                        }
+                        if1++;
+                    } 
+                }
+                int nbCardStack2 = listCardTwo.Count;
+                int if2 = 0;
+                foreach (Control allCard in flwCardLevel2.Controls)
+                {
+                    if (if2 < nbCardStack2)
+                    {
+                        if (CardSelected == allCard.Text)
+                        {
+                            allCard.Text = listCardTwo.Pop().ToString();
+                        }
+                        if2++;
+                    }
+                }
+                int nbCardStack3 = listCardTree.Count;
+                int if3 = 0;
+                foreach (Control allCard in flwCardLevel3.Controls)
+                {
+                    if (if3 < nbCardStack3)
+                    {
+                        if (CardSelected == allCard.Text)
+                        {
+                            allCard.Text = listCardTree.Pop().ToString();
+                        }
+                        if3++;
+                    }
+                }
+                int nbCardStack4 = listCardFor.Count;
+                int if4 = 0;
+                foreach (Control allCard in flwCardNoble.Controls)
+                {
+                    if (if4 < nbCardStack4)
+                    {
+                        if (CardSelected == allCard.Text)
+                        {
+                            allCard.Text = listCardFor.Pop().ToString();
+                        }
+                        if4++;
+                    }
+                }
+            }
+            
+
             cmdNextPlayer.Visible = false;
             
             LoadPlayer(idPlayer);
