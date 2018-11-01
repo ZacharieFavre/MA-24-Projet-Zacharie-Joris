@@ -34,7 +34,7 @@ namespace Splendor
         private int nbDiamand;
         private int nbSaphir;
         public int nbPlayer = 1;
-        public int id = 0;
+
         private string CardSelected;
 
 
@@ -48,7 +48,7 @@ namespace Splendor
 
 
         //id of the player that is playing
-        private int currentPlayerId;
+        private int currentPlayerId=0;
         //boolean to enable us to know if the user can click on a coin or a card
         private bool enableClicLabel;
         //connection to the database
@@ -204,9 +204,9 @@ namespace Splendor
             this.Width = 680;
             this.Height = 780;
 
-            int id = 0;
-           
-            LoadPlayer(idPlayer);
+
+
+            LoadPlayer(currentPlayerId);
 
         }
 
@@ -231,12 +231,6 @@ namespace Splendor
 
             lblChoiceCard.Text = "";
 
-            Player player = new Player();
-            playerList[id].Name = name;
-            playerList[id].Id = id;
-            playerList[id].Ressources = new int[] { 2, 0, 1, 1, 1 };
-            playerList[id].Coins = new int[] { nbRubis,nbSaphir,nbOnyx,nbEmeraude,nbDiamand };
-
             lblPlayerRubisCoin.Text = playerList[id].Coins[0].ToString();
             lblPlayerSaphirCoin.Text = playerList[id].Coins[1].ToString();
             lblPlayerOnyxCoin.Text = playerList[id].Coins[2].ToString();
@@ -256,6 +250,7 @@ namespace Splendor
         /// <param name="e"></param>
         private void lblRubisCoin_Click(object sender, EventArgs e)
         {
+
             if (enableClicLabel)
             {
                 CardSelected = null;
@@ -291,13 +286,15 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblRubisCoin.Text) - 1;
                                 lblRubisCoin.Text = var.ToString();
                                 lblChoiceRubis.Text = nbRubis + "\r\n";
-                                playerList[id].Coins[0] = nbRubis;
+                                playerList[currentPlayerId].Coins[0] = nbRubis;
 
                             }
                         }
                     }
                 }
+                nbtotal = 0;
             }
+            
         }
 
         /// <summary>
@@ -340,11 +337,12 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblSaphirCoin.Text) - 1;
                                 lblSaphirCoin.Text = var.ToString();
                                 lblChoiceSaphir.Text = nbSaphir + "\r\n";
-                                playerList[id].Coins[1] = nbSaphir;
+                                playerList[currentPlayerId].Coins[1] = nbSaphir;
                             }
                         }
                     }
                 }
+                nbtotal = 0;
             }
         }
 
@@ -387,11 +385,12 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblOnyxCoin.Text) - 1;
                                 lblOnyxCoin.Text = var.ToString();
                                 lblChoiceOnyx.Text = nbOnyx + "\r\n";
-                                playerList[id].Coins[2] = nbOnyx;
+                                playerList[currentPlayerId].Coins[2] = nbOnyx;
                             }
                         }
                     }
                 }
+                nbtotal = 0;
             }
         }
 
@@ -435,11 +434,12 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblEmeraudeCoin.Text) - 1;
                                 lblEmeraudeCoin.Text = var.ToString();
                                 lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
-                                playerList[id].Coins[3] = nbEmeraude;
+                                playerList[currentPlayerId].Coins[3] = nbEmeraude;
                             }
                         }
                     }
                 }
+                nbtotal = 0;
             }
 
         }
@@ -484,11 +484,12 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblDiamandCoin.Text) - 1;
                                 lblDiamandCoin.Text = var.ToString();
                                 lblChoiceDiamand.Text = nbDiamand + "\r\n";
-                                playerList[id].Coins[4] = nbDiamand;
+                                playerList[currentPlayerId].Coins[4] = nbDiamand;
                             }
                         }
                     }
                 }
+                nbtotal = 0;
             }
         }
 
@@ -505,53 +506,7 @@ namespace Splendor
             {
                 cmdNextPlayer.Enabled = true;
             }
-            
-            cmdNextPlayer.Enabled = true;
-            Player player = new Player();
-            LoadPlayer(player.Id);
-        }
 
-        /// <summary>
-        /// click on the insert button to insert player in the game
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cmdInsertPlayer_Click(object sender, EventArgs e)
-        {
-            if (nbPlayer >= 4)
-            {
-                cmdInsertPlayer.Enabled = false;
-            }
-            else if(nbPlayer<4)
-            {
-                /// il faudrait faire un sous programe qui renvoie le nom du joueur !
-                nbPlayer++;
-                cmdDeletePlayer.Enabled = true;
-
-                
-                lblNbPlayer.Text = nbPlayer.ToString();
-            }
-        }
-   
-        /// <summary>
-        /// click on the next player to tell him it is his turn
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cmdNextPlayer_Click(object sender, EventArgs e)
-        {
-            //TO DO in release 1.0 : 3 is hard coded (number of players for the game), it shouldn't. 
-            //TO DO Get the id of the player : in release 0.1 there are only 3 players
-            //Reload the data of the player
-
-            //a enlever
-            int nbPlayer = 3;
-            //We are not allowed to click on the next button
-            idPlayer++;
-            if (idPlayer < nbPlayer)
-            {
-                idPlayer = 0;
-            }
             if (CardSelected != null)
             {
                 int nbCardStack1 = listCardOne.Count;
@@ -565,7 +520,7 @@ namespace Splendor
                             allCard.Text = listCardOne.Pop().ToString();
                         }
                         if1++;
-                    } 
+                    }
                 }
                 int nbCardStack2 = listCardTwo.Count;
                 int if2 = 0;
@@ -607,11 +562,70 @@ namespace Splendor
                     }
                 }
             }
+            cmdValidateChoice.Enabled = false;
+            cmdNextPlayer.Enabled = true;
             
+            //deux fois
+            lblPlayerRubisCoin.Text = playerList[currentPlayerId].Coins[0].ToString();
+            lblPlayerSaphirCoin.Text = playerList[currentPlayerId].Coins[1].ToString();
+            lblPlayerOnyxCoin.Text = playerList[currentPlayerId].Coins[2].ToString();
+            lblPlayerEmeraudeCoin.Text = playerList[currentPlayerId].Coins[3].ToString();
+            lblPlayerDiamandCoin.Text = playerList[currentPlayerId].Coins[4].ToString();
 
+
+
+        }
+
+        /// <summary>
+        /// click on the insert button to insert player in the game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmdInsertPlayer_Click(object sender, EventArgs e)
+        {
+            if (nbPlayer >= 4)
+            {
+                cmdInsertPlayer.Enabled = false;
+            }
+            else if(nbPlayer<4)
+            {
+                /// il faudrait faire un sous programe qui renvoie le nom du joueur !
+                nbPlayer++;
+                cmdDeletePlayer.Enabled = true;
+
+                
+                lblNbPlayer.Text = nbPlayer.ToString();
+            }
+        }
+   
+        /// <summary>
+        /// click on the next player to tell him it is his turn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmdNextPlayer_Click(object sender, EventArgs e)
+        {
+            //TO DO in release 1.0 : 3 is hard coded (number of players for the game), it shouldn't. 
+            //TO DO Get the id of the player : in release 0.1 there are only 3 players
+            //Reload the data of the player
+
+
+            //We are not allowed to click on the next button
+            currentPlayerId++;
+            if (currentPlayerId >= nbPlayer)
+            {
+                currentPlayerId = 0;
+            }
+            nbRubis=0;
+            nbOnyx=0;
+            nbEmeraude=0;
+            nbDiamand=0;
+            nbSaphir=0;
+
+            cmdValidateChoice.Enabled = true;
             cmdNextPlayer.Visible = false;
             
-            LoadPlayer(idPlayer);
+            LoadPlayer(currentPlayerId);
 
         }
 
