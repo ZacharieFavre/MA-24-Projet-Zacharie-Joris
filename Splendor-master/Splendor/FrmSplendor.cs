@@ -33,7 +33,7 @@ namespace Splendor
         private int nbEmeraude;
         private int nbDiamand;
         private int nbSaphir;
-        public int nbPlayer = 1;
+        public int nbPlayer = 2;
         public int id = 0;
         private string CardSelected;
 
@@ -75,14 +75,11 @@ namespace Splendor
         private void frmSplendor_Load(object sender, EventArgs e)
         {
             lblGoldCoin.Text = "5";
-
-            lblDiamandCoin.Text = "7";
-            lblEmeraudeCoin.Text = "7" ;
-            lblOnyxCoin.Text = "7";
-            lblRubisCoin.Text = "7";
-            lblSaphirCoin.Text = "7";
-
-
+            lblDiamandCoin.Text = "4";
+            lblEmeraudeCoin.Text = "4";
+            lblOnyxCoin.Text = "4";
+            lblRubisCoin.Text = "4";
+            lblSaphirCoin.Text = "4";
 
             //Afficher les cartes de level 1
             int nbDataInStack1 = listCardOne.Count;
@@ -203,14 +200,41 @@ namespace Splendor
         {
             this.Width = 680;
             this.Height = 780;
-
+            cmdInsertPlayer.Visible = false;
+            cmdDeletePlayer.Visible = false;
             int id = 0;
            
-            LoadPlayer(idPlayer);
+            LoadPlayer(id);
 
         }
 
-
+        private void NbCoinsFPlayer()
+        {
+            if (nbPlayer == 2)
+            {
+                lblDiamandCoin.Text = "4";
+                lblEmeraudeCoin.Text = "4";
+                lblOnyxCoin.Text = "4";
+                lblRubisCoin.Text = "4";
+                lblSaphirCoin.Text = "4";
+            }
+            if (nbPlayer == 3)
+            {
+                lblDiamandCoin.Text = "5";
+                lblEmeraudeCoin.Text = "5";
+                lblOnyxCoin.Text = "5";
+                lblRubisCoin.Text = "5";
+                lblSaphirCoin.Text = "5";
+            }
+            if (nbPlayer == 4)
+            {
+                lblDiamandCoin.Text = "7";
+                lblEmeraudeCoin.Text = "7";
+                lblOnyxCoin.Text = "7";
+                lblRubisCoin.Text = "7";
+                lblSaphirCoin.Text = "7";
+            }
+        }
         /// <summary>
         /// load data about the current player
         /// </summary>
@@ -236,6 +260,12 @@ namespace Splendor
             playerList[id].Id = id;
             playerList[id].Ressources = new int[] { 2, 0, 1, 1, 1 };
             playerList[id].Coins = new int[] { nbRubis,nbSaphir,nbOnyx,nbEmeraude,nbDiamand };
+
+            txtPlayerRubisCard.Text = playerList[id].Ressources[0].ToString();
+            txtPlayerSaphirCard.Text = playerList[id].Ressources[1].ToString();
+            txtPlayerOnyxCard.Text = playerList[id].Ressources[2].ToString();
+            txtPlayerEmeraudeCard.Text = playerList[id].Ressources[3].ToString();
+            txtPlayerDiamandCard.Text = playerList[id].Ressources[4].ToString();
 
             lblPlayerRubisCoin.Text = playerList[id].Coins[0].ToString();
             lblPlayerSaphirCoin.Text = playerList[id].Coins[1].ToString();
@@ -508,7 +538,7 @@ namespace Splendor
             
             cmdNextPlayer.Enabled = true;
             Player player = new Player();
-            LoadPlayer(player.Id);
+            LoadPlayer(id);
         }
 
         /// <summary>
@@ -526,9 +556,10 @@ namespace Splendor
             {
                 /// il faudrait faire un sous programe qui renvoie le nom du joueur !
                 nbPlayer++;
+                NbCoinsFPlayer();
                 cmdDeletePlayer.Enabled = true;
 
-                
+
                 lblNbPlayer.Text = nbPlayer.ToString();
             }
         }
@@ -547,10 +578,10 @@ namespace Splendor
             //a enlever
             int nbPlayer = 3;
             //We are not allowed to click on the next button
-            idPlayer++;
-            if (idPlayer < nbPlayer)
+            id++;
+            if (id < nbPlayer)
             {
-                idPlayer = 0;
+                id = 0;
             }
             if (CardSelected != null)
             {
@@ -611,20 +642,21 @@ namespace Splendor
 
             cmdNextPlayer.Visible = false;
             
-            LoadPlayer(idPlayer);
+            LoadPlayer(id);
 
         }
 
         private void cmdDeletePlayer_Click(object sender, EventArgs e)
         {
-            if (nbPlayer <= 1)
+            if (nbPlayer <= 2)
             {
                 cmdDeletePlayer.Enabled = false;
 
             }
-            else if (nbPlayer >1)
+            else if (nbPlayer >2)
             {
                 nbPlayer--;
+                NbCoinsFPlayer();
                 cmdInsertPlayer.Enabled = true;
                 
                 lblNbPlayer.Text = nbPlayer.ToString();

@@ -642,7 +642,7 @@
             this.lblNbPlayer.Name = "lblNbPlayer";
             this.lblNbPlayer.Size = new System.Drawing.Size(13, 13);
             this.lblNbPlayer.TabIndex = 52;
-            this.lblNbPlayer.Text = "1";
+            this.lblNbPlayer.Text = "2";
             // 
             // cmdDeletePlayer
             // 
