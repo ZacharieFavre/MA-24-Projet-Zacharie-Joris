@@ -254,6 +254,11 @@ namespace Splendor
             lblChoiceEmeraude.Text = "";
 
             lblChoiceCard.Text = "";
+            txtPlayerRubisCard.Text = playerList[id].Ressources[0].ToString();
+            txtPlayerSaphirCard.Text = playerList[id].Ressources[1].ToString();
+            txtPlayerOnyxCard.Text = playerList[id].Ressources[2].ToString();
+            txtPlayerEmeraudeCard.Text = playerList[id].Ressources[3].ToString();
+            txtPlayerDiamandCard.Text = playerList[id].Ressources[4].ToString();
 
             lblPlayerRubisCoin.Text = playerList[id].Coins[0].ToString();
             lblPlayerSaphirCoin.Text = playerList[id].Coins[1].ToString();
