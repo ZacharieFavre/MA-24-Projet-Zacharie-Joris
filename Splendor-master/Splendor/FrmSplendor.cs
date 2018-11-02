@@ -75,14 +75,11 @@ namespace Splendor
         private void frmSplendor_Load(object sender, EventArgs e)
         {
             lblGoldCoin.Text = "5";
-
-            lblDiamandCoin.Text = "7";
-            lblEmeraudeCoin.Text = "7" ;
-            lblOnyxCoin.Text = "7";
-            lblRubisCoin.Text = "7";
-            lblSaphirCoin.Text = "7";
-
-
+            lblDiamandCoin.Text = "4";
+            lblEmeraudeCoin.Text = "4";
+            lblOnyxCoin.Text = "4";
+            lblRubisCoin.Text = "4";
+            lblSaphirCoin.Text = "4";
 
             //Afficher les cartes de level 1
             int nbDataInStack1 = listCardOne.Count;
@@ -203,14 +200,41 @@ namespace Splendor
         {
             this.Width = 680;
             this.Height = 780;
-
+            cmdInsertPlayer.Visible = false;
+            cmdDeletePlayer.Visible = false;
 
 
             LoadPlayer(currentPlayerId);
 
         }
 
-
+        private void NbCoinsFPlayer()
+        {
+            if (nbPlayer == 2)
+            {
+                lblDiamandCoin.Text = "4";
+                lblEmeraudeCoin.Text = "4";
+                lblOnyxCoin.Text = "4";
+                lblRubisCoin.Text = "4";
+                lblSaphirCoin.Text = "4";
+            }
+            if (nbPlayer == 3)
+            {
+                lblDiamandCoin.Text = "5";
+                lblEmeraudeCoin.Text = "5";
+                lblOnyxCoin.Text = "5";
+                lblRubisCoin.Text = "5";
+                lblSaphirCoin.Text = "5";
+            }
+            if (nbPlayer == 4)
+            {
+                lblDiamandCoin.Text = "7";
+                lblEmeraudeCoin.Text = "7";
+                lblOnyxCoin.Text = "7";
+                lblRubisCoin.Text = "7";
+                lblSaphirCoin.Text = "7";
+            }
+        }
         /// <summary>
         /// load data about the current player
         /// </summary>
@@ -631,14 +655,15 @@ namespace Splendor
 
         private void cmdDeletePlayer_Click(object sender, EventArgs e)
         {
-            if (nbPlayer <= 1)
+            if (nbPlayer <= 2)
             {
                 cmdDeletePlayer.Enabled = false;
 
             }
-            else if (nbPlayer >1)
+            else if (nbPlayer >2)
             {
                 nbPlayer--;
+                NbCoinsFPlayer();
                 cmdInsertPlayer.Enabled = true;
                 
                 lblNbPlayer.Text = nbPlayer.ToString();
