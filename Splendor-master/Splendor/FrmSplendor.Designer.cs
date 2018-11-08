@@ -408,11 +408,11 @@
             // 
             // txtPlayerBookedCard
             // 
-            this.txtPlayerBookedCard.Location = new System.Drawing.Point(503, 374);
+            this.txtPlayerBookedCard.Location = new System.Drawing.Point(495, 374);
             this.txtPlayerBookedCard.Margin = new System.Windows.Forms.Padding(2);
             this.txtPlayerBookedCard.Multiline = true;
             this.txtPlayerBookedCard.Name = "txtPlayerBookedCard";
-            this.txtPlayerBookedCard.Size = new System.Drawing.Size(81, 98);
+            this.txtPlayerBookedCard.Size = new System.Drawing.Size(97, 98);
             this.txtPlayerBookedCard.TabIndex = 31;
             // 
             // txtPlayerDiamandCard

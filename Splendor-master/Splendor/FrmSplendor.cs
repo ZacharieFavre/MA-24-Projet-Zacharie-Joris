@@ -35,12 +35,18 @@ namespace Splendor
         private int nbSaphir;
         public int nbPlayer = 2;
 
+        private int nbRubisNeeded;
+        private int nbSaphirNeeded;
+        private int nbOnyxNeeded;
+        private int nbEmeraudeNeeded;
+        private int nbDiamandNeeded;
+
         private string CardSelected;
 
 
         IList<Player> playerList = new List<Player>()
         {
-            new Player(){ Name = "Joueur 1", Id = 1, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }},
+            new Player(){ Name = "Joueur 1", Id = 1, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 9, 9, 9, 9, 9 }},
             new Player(){ Name = "Joueur 2", Id = 2, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }},
             new Player(){ Name = "Joueur 3", Id = 3, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }},
             new Player(){ Name = "Joueur 4", Id = 4, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }}
@@ -182,13 +188,60 @@ namespace Splendor
             //We get the value on the card and we split it to get all the values we need (number of prestige points and ressource)
             //Enable the button "Validate"
 
-
             TextBox txtBox = sender as TextBox;
-            //get the text displayed in the textbox that has been clicked
-            MessageBox.Show(txtBox.Text);
-            CardSelected = txtBox.Text;
-            txtPlayerBookedCard.Text = txtBox.Text;
-            cmdValidateChoice.Visible = true;
+            if(txtBox.Text != " ")
+            {
+                nbRubisNeeded = Convert.ToInt32(getBetween(txtBox.Text, "Rubis", "\r\n"));
+                nbSaphirNeeded = Convert.ToInt32(getBetween(txtBox.Text, "Saphir", "\r\n"));
+                nbOnyxNeeded = Convert.ToInt32(getBetween(txtBox.Text, "Onyx", "\r\n"));
+                nbEmeraudeNeeded = Convert.ToInt32(getBetween(txtBox.Text, "Emeraude", "\r\n"));
+                nbDiamandNeeded = Convert.ToInt32(getBetween(txtBox.Text, "Diamand", "\r\n"));
+
+                if ((playerList[currentPlayerId].Coins[0] >= nbRubisNeeded) && (playerList[currentPlayerId].Coins[1] >= nbSaphirNeeded) && (playerList[currentPlayerId].Coins[2] >= nbOnyxNeeded) && (playerList[currentPlayerId].Coins[3] >= nbEmeraudeNeeded) && (playerList[currentPlayerId].Coins[4] >= nbDiamandNeeded))
+                {
+                    //get the text displayed in the textbox that has been clicked
+                    DialogResult dialogResult = MessageBox.Show("Prendre la carte", "Passer", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        CardSelected = txtBox.Text;
+                        txtPlayerBookedCard.Text = txtBox.Text;
+                        cmdValidateChoice.Visible = true;
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Pas assez de ressources pour acheter cette carte");
+                }
+            }
+                
+        }
+
+        //lire qqch entre deux choses //vient d'internet
+        private string getBetween(string strSource, string strStart, string strEnd)
+        {
+            //supprime des char dans la premiere ligne pour eviter les nom de resource en double
+            strSource=strSource.Substring(5,strSource.Length-5);
+
+            int Start, End;
+            if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+            {
+                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+                End = strSource.IndexOf(strEnd, Start);
+                if (strSource.Substring(Start, End - Start) == "")
+                {
+                    return "0";
+                }
+                else
+                {
+                    return strSource.Substring(Start, End - Start);
+                }
+            }
+            else
+            {
+                return "0";
+            }
         }
 
         /// <summary>
@@ -535,76 +588,95 @@ namespace Splendor
             //TO DO Check if card or coins are selected, impossible to do both at the same time
             if ((nbDiamand != 0)||(nbOnyx != 0)||(nbRubis != 0)||(nbSaphir != 0)||(nbEmeraude != 0)||(CardSelected != null))
             {
-                cmdNextPlayer.Enabled = true;
+                if ((CardSelected != null)&&(nbDiamand+nbOnyx+nbRubis+nbSaphir+nbEmeraude==0))
+                {
+                    int nbCardStack1 = listCardOne.Count;
+                    int if1 = 0;
+                    foreach (Control allCard in flwCardLevel1.Controls)
+                    {
+                        if (CardSelected == allCard.Text)
+                        {
+                            if (if1 < nbCardStack1)
+                            {
+                                allCard.Text = listCardOne.Pop().ToString();
+                            }
+                            else
+                            {
+                                allCard.Text = " ";
+                            }
+                            if1++;
+                        }
+                    }
+                    int nbCardStack2 = listCardTwo.Count;
+                    int if2 = 0;
+                    foreach (Control allCard in flwCardLevel2.Controls)
+                    {
+                        if (CardSelected == allCard.Text)
+                        {
+                            if (if2 < nbCardStack2)
+                            {
+                                allCard.Text = listCardTwo.Pop().ToString();
+                            }
+                            else
+                            {
+                                allCard.Text = " ";
+                            }
+                            if2++;
+                        }
+                    }
+                    int nbCardStack3 = listCardTree.Count;
+                    int if3 = 0;
+                    foreach (Control allCard in flwCardLevel3.Controls)
+                    {
+                        if (CardSelected == allCard.Text)
+                        {
+                            if (if3 < nbCardStack3)
+                            {
+                                allCard.Text = listCardTree.Pop().ToString();
+                            }
+                            else
+                            {
+                                allCard.Text = " ";
+                            }
+                            if3++;
+                        }
+                    }
+                    int nbCardStack4 = listCardFor.Count;
+                    int if4 = 0;
+                    foreach (Control allCard in flwCardNoble.Controls)
+                    {
+                        if (CardSelected == allCard.Text)
+                        {
+                            if (if4 < nbCardStack4)
+                            {
+                                allCard.Text = listCardFor.Pop().ToString();
+                            }
+                            else
+                            {
+                                allCard.Text = " ";
+                            }
+                            if4++;
+                        }
+                    }
+                }
+                else if ((CardSelected != null) && (nbDiamand + nbOnyx + nbRubis + nbSaphir + nbEmeraude == 0))
+                {
+                    //deux fois
+                    lblPlayerRubisCoin.Text = playerList[currentPlayerId].Coins[0].ToString();
+                    lblPlayerSaphirCoin.Text = playerList[currentPlayerId].Coins[1].ToString();
+                    lblPlayerOnyxCoin.Text = playerList[currentPlayerId].Coins[2].ToString();
+                    lblPlayerEmeraudeCoin.Text = playerList[currentPlayerId].Coins[3].ToString();
+                    lblPlayerDiamandCoin.Text = playerList[currentPlayerId].Coins[4].ToString();
+                }
+                else
+                {
+                    //a faire deselectionner les jeton quand appuye sur une carte + deselectionner carte quand appuye sur jeton
+                    MessageBox.Show("Error");
+                }
+
+                cmdValidateChoice.Enabled = false;
+                cmdNextPlayer.Enabled = true;             
             }
-
-            if (CardSelected != null)
-            {
-                int nbCardStack1 = listCardOne.Count;
-                int if1 = 0;
-                foreach (Control allCard in flwCardLevel1.Controls)
-                {
-                    if (if1 < nbCardStack1)
-                    {
-                        if (CardSelected == allCard.Text)
-                        {
-                            allCard.Text = listCardOne.Pop().ToString();
-                        }
-                        if1++;
-                    }
-                }
-                int nbCardStack2 = listCardTwo.Count;
-                int if2 = 0;
-                foreach (Control allCard in flwCardLevel2.Controls)
-                {
-                    if (if2 < nbCardStack2)
-                    {
-                        if (CardSelected == allCard.Text)
-                        {
-                            allCard.Text = listCardTwo.Pop().ToString();
-                        }
-                        if2++;
-                    }
-                }
-                int nbCardStack3 = listCardTree.Count;
-                int if3 = 0;
-                foreach (Control allCard in flwCardLevel3.Controls)
-                {
-                    if (if3 < nbCardStack3)
-                    {
-                        if (CardSelected == allCard.Text)
-                        {
-                            allCard.Text = listCardTree.Pop().ToString();
-                        }
-                        if3++;
-                    }
-                }
-                int nbCardStack4 = listCardFor.Count;
-                int if4 = 0;
-                foreach (Control allCard in flwCardNoble.Controls)
-                {
-                    if (if4 < nbCardStack4)
-                    {
-                        if (CardSelected == allCard.Text)
-                        {
-                            allCard.Text = listCardFor.Pop().ToString();
-                        }
-                        if4++;
-                    }
-                }
-            }
-            cmdValidateChoice.Enabled = false;
-            cmdNextPlayer.Enabled = true;
-            
-            //deux fois
-            lblPlayerRubisCoin.Text = playerList[currentPlayerId].Coins[0].ToString();
-            lblPlayerSaphirCoin.Text = playerList[currentPlayerId].Coins[1].ToString();
-            lblPlayerOnyxCoin.Text = playerList[currentPlayerId].Coins[2].ToString();
-            lblPlayerEmeraudeCoin.Text = playerList[currentPlayerId].Coins[3].ToString();
-            lblPlayerDiamandCoin.Text = playerList[currentPlayerId].Coins[4].ToString();
-
-
-
         }
 
         /// <summary>
@@ -682,7 +754,7 @@ namespace Splendor
 
         private void lblChoiceRubis_Click(object sender, EventArgs e)
         {
-            if (nbRubis==0)
+            if (nbRubis==1)
             {
                 lblChoiceRubis.Visible = false;
                 if (nbSaphir == 0 && nbEmeraude == 0 && nbOnyx == 0 && nbDiamand == 0)
@@ -692,16 +764,17 @@ namespace Splendor
             }
             else
             {
-                nbRubis--;
+                
                 int var = Convert.ToInt32(lblRubisCoin.Text) + 1;
                 lblRubisCoin.Text = var.ToString();
                 lblChoiceRubis.Text = nbRubis + "\r\n";
             }
+            nbRubis--;
         }
 
         private void lblChoiceSaphir_Click(object sender, EventArgs e)
         {
-            if (nbSaphir == 0)
+            if (nbSaphir == 1)
             {
                 lblChoiceSaphir.Visible = false;
                 if (nbRubis == 0 && nbEmeraude == 0 && nbOnyx == 0 && nbDiamand == 0)
@@ -711,16 +784,17 @@ namespace Splendor
             }
             else
             {
-                nbSaphir--;
+                
                 int var = Convert.ToInt32(lblSaphirCoin.Text) + 1;
                 lblSaphirCoin.Text = var.ToString();
                 lblChoiceSaphir.Text = nbSaphir + "\r\n";
             }
+            nbSaphir--;
         }
 
         private void lblChoiceOnyx_Click(object sender, EventArgs e)
         {
-            if (nbOnyx == 0)
+            if (nbOnyx == 1)
             {
                 lblChoiceOnyx.Visible = false;
                 if (nbRubis == 0 && nbEmeraude == 0 && nbSaphir == 0 && nbDiamand == 0)
@@ -730,16 +804,17 @@ namespace Splendor
             }
             else
             {
-                nbOnyx--;
+                
                 int var = Convert.ToInt32(lblOnyxCoin.Text) + 1;
                 lblOnyxCoin.Text = var.ToString();
                 lblChoiceOnyx.Text = nbOnyx + "\r\n";
             }
+            nbOnyx--;
         }
 
         private void lblChoiceEmeraude_Click(object sender, EventArgs e)
         {
-            if (nbEmeraude == 0)
+            if (nbEmeraude == 1)
             {
                 lblChoiceEmeraude.Visible = false;
                 if (nbRubis == 0 && nbOnyx == 0 && nbSaphir == 0 && nbDiamand == 0)
@@ -749,16 +824,17 @@ namespace Splendor
             }
             else
             {
-                nbEmeraude--;
+                
                 int var = Convert.ToInt32(lblEmeraudeCoin.Text) + 1;
                 lblEmeraudeCoin.Text = var.ToString();
                 lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
             }
+            nbEmeraude--;
         }
 
         private void lblChoiceDiamand_Click(object sender, EventArgs e)
         {
-            if (nbDiamand == 0)
+            if (nbDiamand == 1)
             {
                 lblChoiceDiamand.Visible = false;
                 if (nbRubis == 0 && nbOnyx == 0 && nbSaphir == 0 && nbEmeraude == 0)
@@ -768,11 +844,12 @@ namespace Splendor
             }
             else
             {
-                nbDiamand--;
+                
                 int var = Convert.ToInt32(lblDiamandCoin.Text) + 1;
                 lblDiamandCoin.Text = var.ToString();
                 lblChoiceDiamand.Text = nbDiamand + "\r\n";
             }
+            nbDiamand--;
         }
     }
 }
