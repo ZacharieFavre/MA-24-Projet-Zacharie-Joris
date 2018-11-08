@@ -170,6 +170,7 @@
             this.txtLevel31.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel31.Multiline = true;
             this.txtLevel31.Name = "txtLevel31";
+            this.txtLevel31.ReadOnly = true;
             this.txtLevel31.Size = new System.Drawing.Size(102, 98);
             this.txtLevel31.TabIndex = 6;
             // 
@@ -179,6 +180,7 @@
             this.txtLevel32.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel32.Multiline = true;
             this.txtLevel32.Name = "txtLevel32";
+            this.txtLevel32.ReadOnly = true;
             this.txtLevel32.Size = new System.Drawing.Size(102, 98);
             this.txtLevel32.TabIndex = 7;
             // 
@@ -188,6 +190,7 @@
             this.txtLevel33.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel33.Multiline = true;
             this.txtLevel33.Name = "txtLevel33";
+            this.txtLevel33.ReadOnly = true;
             this.txtLevel33.Size = new System.Drawing.Size(102, 98);
             this.txtLevel33.TabIndex = 8;
             // 
@@ -197,6 +200,7 @@
             this.txtLevel34.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel34.Multiline = true;
             this.txtLevel34.Name = "txtLevel34";
+            this.txtLevel34.ReadOnly = true;
             this.txtLevel34.Size = new System.Drawing.Size(102, 98);
             this.txtLevel34.TabIndex = 9;
             // 
@@ -206,6 +210,7 @@
             this.txtLevel21.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel21.Multiline = true;
             this.txtLevel21.Name = "txtLevel21";
+            this.txtLevel21.ReadOnly = true;
             this.txtLevel21.Size = new System.Drawing.Size(102, 98);
             this.txtLevel21.TabIndex = 10;
             // 
@@ -215,6 +220,7 @@
             this.txtLevel22.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel22.Multiline = true;
             this.txtLevel22.Name = "txtLevel22";
+            this.txtLevel22.ReadOnly = true;
             this.txtLevel22.Size = new System.Drawing.Size(102, 98);
             this.txtLevel22.TabIndex = 11;
             // 
@@ -224,6 +230,7 @@
             this.txtLevel23.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel23.Multiline = true;
             this.txtLevel23.Name = "txtLevel23";
+            this.txtLevel23.ReadOnly = true;
             this.txtLevel23.Size = new System.Drawing.Size(102, 98);
             this.txtLevel23.TabIndex = 12;
             // 
@@ -233,6 +240,7 @@
             this.txtLevel24.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel24.Multiline = true;
             this.txtLevel24.Name = "txtLevel24";
+            this.txtLevel24.ReadOnly = true;
             this.txtLevel24.Size = new System.Drawing.Size(102, 98);
             this.txtLevel24.TabIndex = 13;
             // 
@@ -243,6 +251,7 @@
             this.txtLevel11.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel11.Multiline = true;
             this.txtLevel11.Name = "txtLevel11";
+            this.txtLevel11.ReadOnly = true;
             this.txtLevel11.Size = new System.Drawing.Size(102, 98);
             this.txtLevel11.TabIndex = 14;
             // 
@@ -252,6 +261,7 @@
             this.txtLevel12.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel12.Multiline = true;
             this.txtLevel12.Name = "txtLevel12";
+            this.txtLevel12.ReadOnly = true;
             this.txtLevel12.Size = new System.Drawing.Size(102, 98);
             this.txtLevel12.TabIndex = 15;
             // 
@@ -261,6 +271,7 @@
             this.txtLevel13.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel13.Multiline = true;
             this.txtLevel13.Name = "txtLevel13";
+            this.txtLevel13.ReadOnly = true;
             this.txtLevel13.Size = new System.Drawing.Size(102, 98);
             this.txtLevel13.TabIndex = 16;
             // 
@@ -270,6 +281,7 @@
             this.txtLevel14.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel14.Multiline = true;
             this.txtLevel14.Name = "txtLevel14";
+            this.txtLevel14.ReadOnly = true;
             this.txtLevel14.Size = new System.Drawing.Size(102, 98);
             this.txtLevel14.TabIndex = 17;
             // 
@@ -302,6 +314,7 @@
             this.txtPlayerEmeraudeCard.Margin = new System.Windows.Forms.Padding(2);
             this.txtPlayerEmeraudeCard.Multiline = true;
             this.txtPlayerEmeraudeCard.Name = "txtPlayerEmeraudeCard";
+            this.txtPlayerEmeraudeCard.ReadOnly = true;
             this.txtPlayerEmeraudeCard.Size = new System.Drawing.Size(81, 98);
             this.txtPlayerEmeraudeCard.TabIndex = 30;
             // 
@@ -311,6 +324,7 @@
             this.txtPlayerOnyxCard.Margin = new System.Windows.Forms.Padding(2);
             this.txtPlayerOnyxCard.Multiline = true;
             this.txtPlayerOnyxCard.Name = "txtPlayerOnyxCard";
+            this.txtPlayerOnyxCard.ReadOnly = true;
             this.txtPlayerOnyxCard.Size = new System.Drawing.Size(81, 98);
             this.txtPlayerOnyxCard.TabIndex = 29;
             // 
@@ -321,6 +335,7 @@
             this.txtPlayerSaphirCard.Margin = new System.Windows.Forms.Padding(2);
             this.txtPlayerSaphirCard.Multiline = true;
             this.txtPlayerSaphirCard.Name = "txtPlayerSaphirCard";
+            this.txtPlayerSaphirCard.ReadOnly = true;
             this.txtPlayerSaphirCard.Size = new System.Drawing.Size(81, 98);
             this.txtPlayerSaphirCard.TabIndex = 28;
             // 
@@ -331,6 +346,7 @@
             this.txtPlayerRubisCard.Margin = new System.Windows.Forms.Padding(2);
             this.txtPlayerRubisCard.Multiline = true;
             this.txtPlayerRubisCard.Name = "txtPlayerRubisCard";
+            this.txtPlayerRubisCard.ReadOnly = true;
             this.txtPlayerRubisCard.Size = new System.Drawing.Size(81, 98);
             this.txtPlayerRubisCard.TabIndex = 27;
             // 
@@ -412,6 +428,7 @@
             this.txtPlayerBookedCard.Margin = new System.Windows.Forms.Padding(2);
             this.txtPlayerBookedCard.Multiline = true;
             this.txtPlayerBookedCard.Name = "txtPlayerBookedCard";
+            this.txtPlayerBookedCard.ReadOnly = true;
             this.txtPlayerBookedCard.Size = new System.Drawing.Size(97, 98);
             this.txtPlayerBookedCard.TabIndex = 31;
             // 
@@ -422,6 +439,7 @@
             this.txtPlayerDiamandCard.Margin = new System.Windows.Forms.Padding(2);
             this.txtPlayerDiamandCard.Multiline = true;
             this.txtPlayerDiamandCard.Name = "txtPlayerDiamandCard";
+            this.txtPlayerDiamandCard.ReadOnly = true;
             this.txtPlayerDiamandCard.Size = new System.Drawing.Size(81, 98);
             this.txtPlayerDiamandCard.TabIndex = 32;
             // 
@@ -538,6 +556,7 @@
             this.txtNoble4.Margin = new System.Windows.Forms.Padding(2);
             this.txtNoble4.Multiline = true;
             this.txtNoble4.Name = "txtNoble4";
+            this.txtNoble4.ReadOnly = true;
             this.txtNoble4.Size = new System.Drawing.Size(102, 98);
             this.txtNoble4.TabIndex = 45;
             // 
@@ -547,6 +566,7 @@
             this.txtNoble3.Margin = new System.Windows.Forms.Padding(2);
             this.txtNoble3.Multiline = true;
             this.txtNoble3.Name = "txtNoble3";
+            this.txtNoble3.ReadOnly = true;
             this.txtNoble3.Size = new System.Drawing.Size(102, 98);
             this.txtNoble3.TabIndex = 44;
             // 
@@ -556,6 +576,7 @@
             this.txtNoble2.Margin = new System.Windows.Forms.Padding(2);
             this.txtNoble2.Multiline = true;
             this.txtNoble2.Name = "txtNoble2";
+            this.txtNoble2.ReadOnly = true;
             this.txtNoble2.Size = new System.Drawing.Size(102, 98);
             this.txtNoble2.TabIndex = 43;
             // 
@@ -565,6 +586,7 @@
             this.txtNoble1.Margin = new System.Windows.Forms.Padding(2);
             this.txtNoble1.Multiline = true;
             this.txtNoble1.Name = "txtNoble1";
+            this.txtNoble1.ReadOnly = true;
             this.txtNoble1.Size = new System.Drawing.Size(102, 98);
             this.txtNoble1.TabIndex = 42;
             // 
