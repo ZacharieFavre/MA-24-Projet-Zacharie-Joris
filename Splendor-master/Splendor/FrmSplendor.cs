@@ -222,7 +222,7 @@ namespace Splendor
         private string getBetween(string strSource, string strStart, string strEnd)
         {
             //supprime des char dans la premiere ligne pour eviter les nom de resource en double
-            strSource=strSource.Substring(5,strSource.Length-5);
+            strSource=strSource.Substring(3,strSource.Length-3);
 
             int Start, End;
             if (strSource.Contains(strStart) && strSource.Contains(strEnd))
