@@ -41,15 +41,23 @@ namespace Splendor
         private int nbEmeraudeNeeded;
         private int nbDiamandNeeded;
 
+        private string tempBookedCard;
+        private int nbRubisPres;
+        private int nbSaphirPres;
+        private int nbOnyxPres;
+        private int nbEmeraudePres;
+        private int nbDiamandPres;
+        private int totPresPt;
+
         private string CardSelected;
 
 
         IList<Player> playerList = new List<Player>()
         {
-            new Player(){ Name = "Joueur 1", Id = 1, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 9, 9, 9, 9, 9 }},
-            new Player(){ Name = "Joueur 2", Id = 2, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }},
-            new Player(){ Name = "Joueur 3", Id = 3, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }},
-            new Player(){ Name = "Joueur 4", Id = 4, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }}
+            new Player(){ Name = "Joueur 1", Id = 1, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 9, 9, 9, 9, 9 }, NbPrestige=0},
+            new Player(){ Name = "Joueur 2", Id = 2, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }, NbPrestige=0},
+            new Player(){ Name = "Joueur 3", Id = 3, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }, NbPrestige=0},
+            new Player(){ Name = "Joueur 4", Id = 4, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }, NbPrestige=0}
         };
 
 
@@ -319,6 +327,8 @@ namespace Splendor
             lblPlayerEmeraudeCoin.Text = playerList[id].Coins[3].ToString();
             lblPlayerDiamandCoin.Text = playerList[id].Coins[4].ToString();
             currentPlayerId = id;
+
+            lblNbPtPrestige.Text = playerList[id].NbPrestige.ToString();
 
             lblPlayer.Text = "Jeu de " + name;
 
@@ -672,6 +682,22 @@ namespace Splendor
                 {
                     //a faire deselectionner les jeton quand appuye sur une carte + deselectionner carte quand appuye sur jeton
                     MessageBox.Show("Error");
+                }
+                tempBookedCard = txtPlayerBookedCard.Text;
+                tempBookedCard = tempBookedCard.Substring(0, tempBookedCard.Length-(tempBookedCard.Length - 15));
+                nbRubisPres = Convert.ToInt32(getBetween(tempBookedCard, "is", "\r\n"));
+                nbSaphirPres = Convert.ToInt32(getBetween(tempBookedCard, "hir", "\r\n"));
+                nbOnyxPres = Convert.ToInt32(getBetween(tempBookedCard, "x", "\r\n"));
+                nbEmeraudePres = Convert.ToInt32(getBetween(tempBookedCard, "raude", "\r\n"));
+                nbDiamandPres = Convert.ToInt32(getBetween(tempBookedCard, "mand", "\r\n"));
+
+                totPresPt += nbRubisPres + nbSaphirPres + nbOnyxPres + nbEmeraudePres + nbDiamandPres;
+                playerList[currentPlayerId].NbPrestige = totPresPt;
+                lblNbPtPrestige.Text = totPresPt.ToString();
+                if (totPresPt >= 15)
+                {
+                    MessageBox.Show(playerList[currentPlayerId].Name + " a Gagné!");
+                    Application.Exit();
                 }
 
                 cmdValidateChoice.Enabled = false;
