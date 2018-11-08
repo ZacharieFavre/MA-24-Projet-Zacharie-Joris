@@ -155,7 +155,7 @@
             // 
             this.lblDiamandCoin.AutoSize = true;
             this.lblDiamandCoin.BackColor = System.Drawing.SystemColors.Window;
-            this.lblDiamandCoin.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.lblDiamandCoin.ForeColor = System.Drawing.SystemColors.MenuText;
             this.lblDiamandCoin.Location = new System.Drawing.Point(368, 15);
             this.lblDiamandCoin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDiamandCoin.Name = "lblDiamandCoin";
@@ -354,7 +354,7 @@
             // 
             this.lblPlayerDiamandCoin.AutoSize = true;
             this.lblPlayerDiamandCoin.BackColor = System.Drawing.SystemColors.Window;
-            this.lblPlayerDiamandCoin.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.lblPlayerDiamandCoin.ForeColor = System.Drawing.SystemColors.MenuText;
             this.lblPlayerDiamandCoin.Location = new System.Drawing.Point(379, 593);
             this.lblPlayerDiamandCoin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPlayerDiamandCoin.Name = "lblPlayerDiamandCoin";
@@ -499,7 +499,7 @@
             // 
             this.lblChoiceDiamand.AutoSize = true;
             this.lblChoiceDiamand.BackColor = System.Drawing.SystemColors.Window;
-            this.lblChoiceDiamand.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.lblChoiceDiamand.ForeColor = System.Drawing.SystemColors.MenuText;
             this.lblChoiceDiamand.Location = new System.Drawing.Point(379, 524);
             this.lblChoiceDiamand.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChoiceDiamand.Name = "lblChoiceDiamand";
@@ -593,6 +593,7 @@
             // lblNbPtPrestige
             // 
             this.lblNbPtPrestige.AutoSize = true;
+            this.lblNbPtPrestige.ForeColor = System.Drawing.Color.Orange;
             this.lblNbPtPrestige.Location = new System.Drawing.Point(467, 592);
             this.lblNbPtPrestige.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNbPtPrestige.Name = "lblNbPtPrestige";
