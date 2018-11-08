@@ -668,21 +668,93 @@ namespace Splendor
                             if4++;
                         }
                     }
+                    cmdValidateChoice.Enabled = false;
+                    cmdNextPlayer.Enabled = true;
+
+                    //enlever les resources lors de l'achat
+                    string txtCardSelected = txtPlayerBookedCard.Text;
+                    int nbRubisNeededLess = Convert.ToInt32(getBetween(txtCardSelected, "Rubis", "\r\n"));
+                    int nbSaphirNeededLess = Convert.ToInt32(getBetween(txtCardSelected, "Saphir", "\r\n"));
+                    int nbOnyxNeededLess = Convert.ToInt32(getBetween(txtCardSelected, "Onyx", "\r\n"));
+                    int nbEmeraudeNeededLess = Convert.ToInt32(getBetween(txtCardSelected, "Emeraude", "\r\n"));
+                    int nbDiamandNeededLess = Convert.ToInt32(getBetween(txtCardSelected, "Diamand", "\r\n"));
+
+                    nbRubisNeededLess -= playerList[currentPlayerId].Ressources[0];
+                    playerList[currentPlayerId].Coins[0] = (nbRubisNeededLess - playerList[currentPlayerId].Coins[0])*-1;
+
+                    nbSaphirNeededLess -= playerList[currentPlayerId].Ressources[1];
+                    playerList[currentPlayerId].Coins[1] = (nbSaphirNeededLess - playerList[currentPlayerId].Coins[1])*-1;
+
+                    nbOnyxNeededLess -= playerList[currentPlayerId].Ressources[2];
+                    playerList[currentPlayerId].Coins[2] = (nbOnyxNeededLess - playerList[currentPlayerId].Coins[2]) * -1;
+
+                    nbEmeraudeNeededLess -= playerList[currentPlayerId].Ressources[3];
+                    playerList[currentPlayerId].Coins[3] = (nbEmeraudeNeededLess - playerList[currentPlayerId].Coins[3]) * -1;
+
+                    nbDiamandNeededLess -= playerList[currentPlayerId].Ressources[4];
+                    playerList[currentPlayerId].Coins[4] = (nbDiamandNeededLess - playerList[currentPlayerId].Coins[4]) * -1;
+
+                    string txtCardSelectedSec = txtPlayerBookedCard.Text.Substring(0, txtPlayerBookedCard.Text.Length - (txtPlayerBookedCard.Text.Length - 4));
+                    if (txtCardSelectedSec=="Rubi")
+                    {
+                        playerList[currentPlayerId].Ressources[0]++;
+                    }
+
+                    if (txtCardSelectedSec == "Saph")
+                    {
+                        playerList[currentPlayerId].Ressources[1]++;
+                    }
+
+                    if (txtCardSelectedSec == "Onxy")
+                    {
+                        playerList[currentPlayerId].Ressources[2]++;
+                    }
+
+                    if (txtCardSelectedSec == "Emer")
+                    {
+                        playerList[currentPlayerId].Ressources[3]++;
+                    }
+
+                    if (txtCardSelectedSec == "Diam")
+                    {
+                        playerList[currentPlayerId].Ressources[4]++;
+                    }
+
                 }
                 else if ((CardSelected != null) && (nbDiamand + nbOnyx + nbRubis + nbSaphir + nbEmeraude == 0))
                 {
-                    //deux fois
-                    lblPlayerRubisCoin.Text = playerList[currentPlayerId].Coins[0].ToString();
-                    lblPlayerSaphirCoin.Text = playerList[currentPlayerId].Coins[1].ToString();
-                    lblPlayerOnyxCoin.Text = playerList[currentPlayerId].Coins[2].ToString();
-                    lblPlayerEmeraudeCoin.Text = playerList[currentPlayerId].Coins[3].ToString();
-                    lblPlayerDiamandCoin.Text = playerList[currentPlayerId].Coins[4].ToString();
+                    
+                    cmdValidateChoice.Enabled = false;
+                    cmdNextPlayer.Enabled = true;
                 }
                 else
                 {
                     //a faire deselectionner les jeton quand appuye sur une carte + deselectionner carte quand appuye sur jeton
-                    MessageBox.Show("Error");
+                    if ((CardSelected != null) && (nbDiamand + nbOnyx + nbRubis + nbSaphir + nbEmeraude != 0))
+                    {
+                        CardSelected = null;
+                        nbDiamand = 0;
+                        lblChoiceDiamand.Text = "0";
+                        nbOnyx = 0;
+                        lblChoiceOnyx.Text = "0";
+                        nbRubis = 0;
+                        lblChoiceRubis.Text = "0";
+                        nbSaphir = 0;
+                        lblChoiceSaphir.Text = "0";
+                        nbEmeraude = 0;
+                        lblChoiceEmeraude.Text = "0";
+                        MessageBox.Show("Vous avez une carte et des jetons de séléctionné");
+                        cmdValidateChoice.Enabled = true;
+                        cmdNextPlayer.Enabled = false;
+                    }
+                        
                 }
+                //deux fois
+                lblPlayerRubisCoin.Text = playerList[currentPlayerId].Coins[0].ToString();
+                lblPlayerSaphirCoin.Text = playerList[currentPlayerId].Coins[1].ToString();
+                lblPlayerOnyxCoin.Text = playerList[currentPlayerId].Coins[2].ToString();
+                lblPlayerEmeraudeCoin.Text = playerList[currentPlayerId].Coins[3].ToString();
+                lblPlayerDiamandCoin.Text = playerList[currentPlayerId].Coins[4].ToString();
                 tempBookedCard = txtPlayerBookedCard.Text;
                 tempBookedCard = tempBookedCard.Substring(0, tempBookedCard.Length-(tempBookedCard.Length - 15));
                 nbRubisPres = Convert.ToInt32(getBetween(tempBookedCard, "is", "\r\n"));
