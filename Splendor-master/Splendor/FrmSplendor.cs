@@ -866,6 +866,7 @@ namespace Splendor
                 {
                     cmdInsertPlayer.Enabled = false;
                 }
+                //méthode pour choisir le nombre de jeton par rapport au nombre de joueur
                 NbCoinsFPlayer();
                 cmdDeletePlayer.Enabled = true;
 
@@ -909,7 +910,7 @@ namespace Splendor
         /// <param name="e"></param>
         private void cmdDeletePlayer_Click(object sender, EventArgs e)
         {
-            
+            //si le nombre de joueur est plus grand que 2 on peut en enlever
             if (nbPlayer >2)
             {
                 nbPlayer--;
@@ -918,6 +919,7 @@ namespace Splendor
                     cmdDeletePlayer.Enabled = false;
 
                 }
+                //méthode pour choisir le nombre de jeton par rapport au nombre de joueur
                 NbCoinsFPlayer();
                 cmdInsertPlayer.Enabled = true;
                 
