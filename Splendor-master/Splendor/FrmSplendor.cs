@@ -54,7 +54,7 @@ namespace Splendor
 
         IList<Player> playerList = new List<Player>()
         {
-            new Player(){ Name = "Joueur 1", Id = 1, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 9, 9, 9, 9, 9 }, NbPrestige=0},
+            new Player(){ Name = "Joueur 1", Id = 1, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }, NbPrestige=0},
             new Player(){ Name = "Joueur 2", Id = 2, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }, NbPrestige=0},
             new Player(){ Name = "Joueur 3", Id = 3, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }, NbPrestige=0},
             new Player(){ Name = "Joueur 4", Id = 4, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }, NbPrestige=0}
@@ -205,7 +205,7 @@ namespace Splendor
                 nbEmeraudeNeeded = Convert.ToInt32(getBetween(txtBox.Text, "Emeraude", "\r\n"));
                 nbDiamandNeeded = Convert.ToInt32(getBetween(txtBox.Text, "Diamand", "\r\n"));
 
-                if ((playerList[currentPlayerId].Coins[0] >= nbRubisNeeded) && (playerList[currentPlayerId].Coins[1] >= nbSaphirNeeded) && (playerList[currentPlayerId].Coins[2] >= nbOnyxNeeded) && (playerList[currentPlayerId].Coins[3] >= nbEmeraudeNeeded) && (playerList[currentPlayerId].Coins[4] >= nbDiamandNeeded))
+                if ((playerList[currentPlayerId].Coins[0]+ playerList[currentPlayerId].Ressources[0] >= nbRubisNeeded) && (playerList[currentPlayerId].Coins[1] + playerList[currentPlayerId].Ressources[1] >= nbSaphirNeeded) && (playerList[currentPlayerId].Coins[2] + playerList[currentPlayerId].Ressources[2] >= nbOnyxNeeded) && (playerList[currentPlayerId].Coins[3] + playerList[currentPlayerId].Ressources[3] >= nbEmeraudeNeeded) && (playerList[currentPlayerId].Coins[4] + playerList[currentPlayerId].Ressources[4] >= nbDiamandNeeded))
                 {
                     //get the text displayed in the textbox that has been clicked
                     DialogResult dialogResult = MessageBox.Show("Prendre la carte", "Passer", MessageBoxButtons.YesNo);
@@ -214,6 +214,7 @@ namespace Splendor
                         CardSelected = txtBox.Text;
                         txtPlayerBookedCard.Text = txtBox.Text;
                         cmdValidateChoice.Visible = true;
+                        cmdValidateChoice.Enabled = true;
                     }
 
 
@@ -243,7 +244,15 @@ namespace Splendor
                 }
                 else
                 {
-                    return strSource.Substring(Start, End - Start);
+                    if(Start - (End - Start) == 0)
+                    {
+                        return strSource.Substring(Start, End - Start);
+                    }
+                    else
+                    {
+                        return "0";
+                    }
+                    
                 }
             }
             else
@@ -375,6 +384,7 @@ namespace Splendor
                                 lblRubisCoin.Text = var.ToString();
                                 lblChoiceRubis.Text = nbRubis + "\r\n";
                                 playerList[currentPlayerId].Coins[0] = nbRubis;
+                                cmdValidateChoice.Enabled = true;
 
                             }
                         }
@@ -398,6 +408,8 @@ namespace Splendor
         {
             if (enableClicLabel)
             {
+                CardSelected = null;
+                txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceSaphir.Visible = true;
                 int nbtotal = nbRubis + nbSaphir + nbOnyx + nbEmeraude + nbDiamand;
@@ -426,6 +438,7 @@ namespace Splendor
                                 lblSaphirCoin.Text = var.ToString();
                                 lblChoiceSaphir.Text = nbSaphir + "\r\n";
                                 playerList[currentPlayerId].Coins[1] = nbSaphir;
+                                cmdValidateChoice.Enabled = true;
                             }
 
                         }
@@ -449,6 +462,8 @@ namespace Splendor
         { 
             if (enableClicLabel)
             {
+                CardSelected = null;
+                txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceOnyx.Visible = true;
                 int nbtotal = nbRubis + nbSaphir + nbOnyx + nbEmeraude + nbDiamand;
@@ -476,6 +491,7 @@ namespace Splendor
                                 lblOnyxCoin.Text = var.ToString();
                                 lblChoiceOnyx.Text = nbOnyx + "\r\n";
                                 playerList[currentPlayerId].Coins[2] = nbOnyx;
+                                cmdValidateChoice.Enabled = true;
                             }
                         }
                     }
@@ -497,6 +513,8 @@ namespace Splendor
         {
             if (enableClicLabel)
             {
+                CardSelected = null;
+                txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceEmeraude.Visible = true;
                 int nbtotal = nbRubis + nbSaphir + nbOnyx + nbEmeraude + nbDiamand;
@@ -525,6 +543,7 @@ namespace Splendor
                                 lblEmeraudeCoin.Text = var.ToString();
                                 lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
                                 playerList[currentPlayerId].Coins[3] = nbEmeraude;
+                                cmdValidateChoice.Enabled = true;
                             }
                         }
                     }
@@ -547,6 +566,8 @@ namespace Splendor
         {
             if (enableClicLabel)
             {
+                CardSelected = null;
+                txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceDiamand.Visible = true;
                 int nbtotal = nbRubis + nbSaphir + nbOnyx + nbEmeraude + nbDiamand;
@@ -575,6 +596,7 @@ namespace Splendor
                                 lblDiamandCoin.Text = var.ToString();
                                 lblChoiceDiamand.Text = nbDiamand + "\r\n";
                                 playerList[currentPlayerId].Coins[4] = nbDiamand;
+                                cmdValidateChoice.Enabled = true;
                             }
                         }
                     }
@@ -720,6 +742,23 @@ namespace Splendor
                         playerList[currentPlayerId].Ressources[4]++;
                     }
 
+                    tempBookedCard = txtPlayerBookedCard.Text;
+                    tempBookedCard = tempBookedCard.Substring(0, tempBookedCard.Length - (tempBookedCard.Length - 15));
+                    nbRubisPres = Convert.ToInt32(getBetween(tempBookedCard, "is", "\r\n"));
+                    nbSaphirPres = Convert.ToInt32(getBetween(tempBookedCard, "hir", "\r\n"));
+                    nbOnyxPres = Convert.ToInt32(getBetween(tempBookedCard, "x", "\r\n"));
+                    nbEmeraudePres = Convert.ToInt32(getBetween(tempBookedCard, "raude", "\r\n"));
+                    nbDiamandPres = Convert.ToInt32(getBetween(tempBookedCard, "mand", "\r\n"));
+
+                    totPresPt += nbRubisPres + nbSaphirPres + nbOnyxPres + nbEmeraudePres + nbDiamandPres;
+                    playerList[currentPlayerId].NbPrestige = totPresPt;
+                    lblNbPtPrestige.Text = totPresPt.ToString();
+                    if (totPresPt >= 15)
+                    {
+                        MessageBox.Show(playerList[currentPlayerId].Name + " a Gagné!");
+                        Application.Exit();
+                    }
+
                 }
                 else if ((CardSelected != null) && (nbDiamand + nbOnyx + nbRubis + nbSaphir + nbEmeraude == 0))
                 {
@@ -755,22 +794,6 @@ namespace Splendor
                 lblPlayerOnyxCoin.Text = playerList[currentPlayerId].Coins[2].ToString();
                 lblPlayerEmeraudeCoin.Text = playerList[currentPlayerId].Coins[3].ToString();
                 lblPlayerDiamandCoin.Text = playerList[currentPlayerId].Coins[4].ToString();
-                tempBookedCard = txtPlayerBookedCard.Text;
-                tempBookedCard = tempBookedCard.Substring(0, tempBookedCard.Length-(tempBookedCard.Length - 15));
-                nbRubisPres = Convert.ToInt32(getBetween(tempBookedCard, "is", "\r\n"));
-                nbSaphirPres = Convert.ToInt32(getBetween(tempBookedCard, "hir", "\r\n"));
-                nbOnyxPres = Convert.ToInt32(getBetween(tempBookedCard, "x", "\r\n"));
-                nbEmeraudePres = Convert.ToInt32(getBetween(tempBookedCard, "raude", "\r\n"));
-                nbDiamandPres = Convert.ToInt32(getBetween(tempBookedCard, "mand", "\r\n"));
-
-                totPresPt += nbRubisPres + nbSaphirPres + nbOnyxPres + nbEmeraudePres + nbDiamandPres;
-                playerList[currentPlayerId].NbPrestige = totPresPt;
-                lblNbPtPrestige.Text = totPresPt.ToString();
-                if (totPresPt >= 15)
-                {
-                    MessageBox.Show(playerList[currentPlayerId].Name + " a Gagné!");
-                    Application.Exit();
-                }
 
                 cmdValidateChoice.Enabled = false;
                 cmdNextPlayer.Enabled = true;             
@@ -825,7 +848,7 @@ namespace Splendor
             nbDiamand=0;
             nbSaphir=0;
 
-            cmdValidateChoice.Enabled = true;
+            cmdValidateChoice.Enabled = false;
             cmdNextPlayer.Visible = false;
             
             LoadPlayer(currentPlayerId);
