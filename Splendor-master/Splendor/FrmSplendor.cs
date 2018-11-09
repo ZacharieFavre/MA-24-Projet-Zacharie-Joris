@@ -36,12 +36,14 @@ namespace Splendor
         private int totCoinChoice;
         public int nbPlayer = 2;
 
+        
         private int nbRubisNeeded;
         private int nbSaphirNeeded;
         private int nbOnyxNeeded;
         private int nbEmeraudeNeeded;
         private int nbDiamandNeeded;
 
+        //utilisé pour claculer le nombre de points de prestige
         private string tempBookedCard;
         private int nbRubisPres;
         private int nbSaphirPres;
@@ -52,7 +54,7 @@ namespace Splendor
 
         private string CardSelected;
 
-
+        //crée une liste de joueurs Avec un nom donné un id donné un certain nombre de ressources de coins et de point de prestige 
         IList<Player> playerList = new List<Player>()
         {
             new Player(){ Name = "Joueur 1", Id = 1, Ressources = new int[]{ 0, 0, 0, 0, 0 }, Coins= new int[]{ 0, 0, 0, 0, 0 }, NbPrestige=0},
@@ -89,6 +91,7 @@ namespace Splendor
         /// <param name="e"></param>
         private void frmSplendor_Load(object sender, EventArgs e)
         {
+            //donne le nombre de jetons de base
             lblGoldCoin.Text = "5";
             lblDiamandCoin.Text = "4";
             lblEmeraudeCoin.Text = "4";
@@ -152,7 +155,7 @@ namespace Splendor
 
             }
 
-
+            //prépare la fenêtre de jeu
             this.Width = 680;
             this.Height = 540;
 
@@ -269,16 +272,19 @@ namespace Splendor
         /// <param name="e"></param>
         private void cmdPlay_Click(object sender, EventArgs e)
         {
+            //prépare la fenêtre de jeu
             this.Width = 680;
             this.Height = 780;
             cmdInsertPlayer.Visible = false;
             cmdDeletePlayer.Visible = false;
 
-
+            //charge le premier joueur
             LoadPlayer(currentPlayerId);
 
         }
-
+        /// <summary>
+        /// donne le nombre de jetons suivant le nombre de joueurs choisis
+        /// </summary>
         private void NbCoinsFPlayer()
         {
             if (nbPlayer == 2)
@@ -323,25 +329,25 @@ namespace Splendor
             lblChoiceRubis.Text = "";
             lblChoiceSaphir.Text = "";
             lblChoiceEmeraude.Text = "";
-
+            //charge le nomre de ressources du joueur
             lblChoiceCard.Text = "";
             txtPlayerRubisCard.Text = playerList[id].Ressources[0].ToString();
             txtPlayerSaphirCard.Text = playerList[id].Ressources[1].ToString();
             txtPlayerOnyxCard.Text = playerList[id].Ressources[2].ToString();
             txtPlayerEmeraudeCard.Text = playerList[id].Ressources[3].ToString();
             txtPlayerDiamandCard.Text = playerList[id].Ressources[4].ToString();
-
+            //charge le nomre de jetons du joueur
             lblPlayerRubisCoin.Text = playerList[id].Coins[0].ToString();
             lblPlayerSaphirCoin.Text = playerList[id].Coins[1].ToString();
             lblPlayerOnyxCoin.Text = playerList[id].Coins[2].ToString();
             lblPlayerEmeraudeCoin.Text = playerList[id].Coins[3].ToString();
             lblPlayerDiamandCoin.Text = playerList[id].Coins[4].ToString();
             currentPlayerId = id;
-
+            //charge le nomre de point de prestige du joueur
             lblNbPtPrestige.Text = playerList[id].NbPrestige.ToString();
-
+            //affiche le joueur actuel
             lblPlayer.Text = "Jeu de " + name;
-
+            //désactive le boutton jouer
             cmdPlay.Enabled = false;
         }
 
@@ -352,28 +358,33 @@ namespace Splendor
         /// <param name="e"></param>
         private void lblRubisCoin_Click(object sender, EventArgs e)
         {
-
             if (enableClicLabel)
             {
+                // enlève la carte choisie si il y en a une
                 CardSelected = null;
+                // l'efface de la text box
                 txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceRubis.Visible = true;
+                //calcule le nombre total de jeton choisis
                 int nbtotal = nbRubis + nbSaphir + nbOnyx + nbEmeraude + nbDiamand;
                 if (lblRubisCoin.Text != "0")
                 {
+                    //si il a pris 3 jetons il ne peut pas en prendre plus  
                     if (nbtotal >= 3)
                     {
                         MessageBox.Show("Vous ne pouvez pas prendre plus de jetons");
                     }
                     else
                     {
+                        //si il a déjà pris 2 jetons d'eune coouleur il ne peut plus prendre de jetoons
                         if (nbRubis == 2 || nbSaphir == 2 || nbOnyx == 2 || nbEmeraude == 2 || nbDiamand == 2)
                         {
                             MessageBox.Show("Vous pouvez prendre maximum 2 pièces de la même couleur");
                         }
                         else
                         {
+                            // si il a déjà pris 1 jetons de rubis + un autre il ne peut pas reprendre de rubis
                             if ((nbRubis == 1 && nbSaphir == 1) || (nbRubis == 1 && nbOnyx == 1) || (nbRubis == 1 && nbEmeraude == 1) || (nbRubis == 1 && nbDiamand == 1) || ((lblRubisCoin.Text == "3" || lblRubisCoin.Text == "2" || lblRubisCoin.Text == "1") && nbRubis == 1))
                             {
                                 MessageBox.Show("Choisissez une autre couleur");
@@ -391,10 +402,12 @@ namespace Splendor
                         }
                     }
                 }
+                // si il n'y a plus de rubis il ne peut plus en prendre
                 else
                 {
                     MessageBox.Show("Il n'y en a plus");
                 }
+                //il remet le nomre total de jetons à 0
                 nbtotal = 0;
             }
 
@@ -409,25 +422,31 @@ namespace Splendor
         {
             if (enableClicLabel)
             {
+                // enlève la carte choisie si il y en a une
                 CardSelected = null;
+                // l'efface de la text box
                 txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceSaphir.Visible = true;
+                //calcule le nombre total de jeton choisis
                 int nbtotal = nbRubis + nbSaphir + nbOnyx + nbEmeraude + nbDiamand;
                 if (lblSaphirCoin.Text != "0")
                 {
+                    //si il a pris 3 jetons il ne peut pas en prendre plus  
                     if (nbtotal >= 3)
                     {
                         MessageBox.Show("Vous ne pouvez pas prendre plus de jetons");
                     }
                     else
                     {
+                        //si il a déjà pris 2 jetons d'eune coouleur il ne peut plus prendre de jetons
                         if (nbRubis == 2 || nbSaphir == 2 || nbOnyx == 2 || nbEmeraude == 2 || nbDiamand == 2)
                         {
                             MessageBox.Show("Vous pouvez prendre maximum 2 pièces de la même couleur");
                         }
                         else
                         {
+                            // si il a déjà pris 1 jetons de saphir + un autre il ne peut pas reprendre de saphir
                             if ((nbRubis == 1 && nbSaphir == 1) || (nbSaphir == 1 && nbOnyx == 1) || (nbSaphir == 1 && nbEmeraude == 1) || (nbSaphir == 1 && nbDiamand == 1) || ((lblSaphirCoin.Text == "3" || lblSaphirCoin.Text == "2" || lblSaphirCoin.Text == "1") && nbSaphir == 1))
                             {
                                 MessageBox.Show("Choisissez une autre couleur");
@@ -445,11 +464,12 @@ namespace Splendor
                         }
                     }
                 }
+                // si il n'y a plus de saphir il ne peut plus en prendre
                 else
                 {
                     MessageBox.Show("Il n'y en a plus");
                 }
-                
+                //il remet le nomre total de jetons à 0
                 nbtotal = 0;
             }
         }
@@ -463,24 +483,30 @@ namespace Splendor
         { 
             if (enableClicLabel)
             {
+                // enlève la carte choisie si il y en a une
                 CardSelected = null;
+                // l'efface de la text box
                 txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceOnyx.Visible = true;
+                //calcule le nombre total de jeton choisis
                 int nbtotal = nbRubis + nbSaphir + nbOnyx + nbEmeraude + nbDiamand;
                 if (lblOnyxCoin.Text!="0") {
+                    //si il a pris 3 jetons il ne peut pas en prendre plus  
                     if (nbtotal >= 3)
                     {
                         MessageBox.Show("Vous ne pouvez pas prendre plus de jetons");
                     }
                     else
                     {
+                        //si il a déjà pris 2 jetons d'eune coouleur il ne peut plus prendre de jetons
                         if (nbRubis == 2 || nbSaphir == 2 || nbOnyx == 2 || nbEmeraude == 2 || nbDiamand == 2)
                         {
                             MessageBox.Show("Vous pouvez prendre maximum 2 pièces de la même couleur");
                         }
                         else
                         {
+                            // si il a déjà pris 1 jetons d'Onyx + un autre il ne peut pas reprendre d'Onyx
                             if ((nbRubis == 1 && nbOnyx == 1) || (nbSaphir == 1 && nbOnyx == 1) || (nbOnyx == 1 && nbEmeraude == 1) || (nbOnyx == 1 && nbDiamand == 1) || ((lblOnyxCoin.Text == "3" || lblOnyxCoin.Text == "2" || lblOnyxCoin.Text == "1") && nbOnyx == 1))
                             {
                                 MessageBox.Show("Choisissez une autre couleur");
@@ -497,10 +523,12 @@ namespace Splendor
                         }
                     }
                 }
+                // si il n'y a plus d'Onyx il ne peut plus en prendre
                 else
                 {
                     MessageBox.Show("Il n'y en a plus");
                 }
+                //il remet le nomre total de jetons à 0
                 nbtotal = 0;
             }
         }
@@ -514,25 +542,31 @@ namespace Splendor
         {
             if (enableClicLabel)
             {
+                // enlève la carte choisie si il y en a une
                 CardSelected = null;
+                // l'efface de la text box
                 txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceEmeraude.Visible = true;
+                //calcule le nombre total de jeton choisis
                 int nbtotal = nbRubis + nbSaphir + nbOnyx + nbEmeraude + nbDiamand;
                 if (lblEmeraudeCoin.Text != "0")
                 {
+                    //si il a pris 3 jetons il ne peut pas en prendre plus  
                     if (nbtotal >= 3)
                     {
                         MessageBox.Show("Vous ne pouvez pas prendre plus de jetons");
                     }
                     else
                     {
+                        //si il a déjà pris 2 jetons d'eune coouleur il ne peut plus prendre de jetons
                         if (nbRubis == 2 || nbSaphir == 2 || nbOnyx == 2 || nbEmeraude == 2 || nbDiamand == 2)
                         {
                             MessageBox.Show("Vous pouvez prendre maximum 2 pièces de la même couleur");
                         }
                         else
                         {
+                            // si il a déjà pris 1 jetons d'Emeraude + un autre il ne peut pas reprendre d'Emeraude
                             if ((nbRubis == 1 && nbEmeraude == 1) || (nbEmeraude == 1 && nbOnyx == 1) || (nbSaphir == 1 && nbEmeraude == 1) || (nbEmeraude == 1 && nbDiamand == 1) || ((lblEmeraudeCoin.Text == "3" || lblEmeraudeCoin.Text == "2" || lblEmeraudeCoin.Text == "1") && nbEmeraude == 1))
                             {
                                 MessageBox.Show("Choisissez une autre couleur");
@@ -549,10 +583,12 @@ namespace Splendor
                         }
                     }
                 }
+                // si il n'y a plus d'Emeraude il ne peut plus en prendre
                 else
                 {
                     MessageBox.Show("Il n'y en a plus");
                 }
+                //il remet le nomre total de jetons à 0
                 nbtotal = 0;
             }
 
@@ -567,25 +603,31 @@ namespace Splendor
         {
             if (enableClicLabel)
             {
+                // enlève la carte choisie si il y en a une
                 CardSelected = null;
+                // l'efface de la text box
                 txtPlayerBookedCard.Text = null;
                 cmdValidateChoice.Visible = true;
                 lblChoiceDiamand.Visible = true;
+                //calcule le nombre total de jeton choisis
                 int nbtotal = nbRubis + nbSaphir + nbOnyx + nbEmeraude + nbDiamand;
                 if (lblDiamandCoin.Text != "0")
                 {
+                    //si il a pris 3 jetons il ne peut pas en prendre plus  
                     if (nbtotal >= 3)
                     {
                         MessageBox.Show("Vous ne pouvez pas prendre plus de jetons");
                     }
                     else
                     {
+                        //si il a déjà pris 2 jetons d'eune coouleur il ne peut plus prendre de jetons
                         if (nbRubis == 2 || nbSaphir == 2 || nbOnyx == 2 || nbEmeraude == 2 || nbDiamand == 2)
                         {
                             MessageBox.Show("Vous pouvez prendre maximum 2 pièces de la même couleur");
                         }
                         else
                         {
+                            // si il a déjà pris 1 jetons de diamand + un autre il ne peut pas reprendre de diamand
                             if ((nbRubis == 1 && nbDiamand == 1) || (nbDiamand == 1 && nbOnyx == 1) || (nbDiamand == 1 && nbEmeraude == 1) || (nbSaphir == 1 && nbDiamand == 1) || ((lblDiamandCoin.Text == "3" || lblDiamandCoin.Text == "2" || lblDiamandCoin.Text == "1") && nbDiamand == 1))
                             {
                                 MessageBox.Show("Choisissez une autre couleur");
@@ -602,10 +644,12 @@ namespace Splendor
                         }
                     }
                 }
+                // si il n'y a plus de diamand il ne peut plus en prendre
                 else
                 {
                     MessageBox.Show("Il n'y en a plus");
                 }
+                //il remet le nomre total de jetons à 0
                 nbtotal = 0;
             }
         }
@@ -617,10 +661,12 @@ namespace Splendor
         /// <param name="e"></param>
         private void cmdValidateChoice_Click(object sender, EventArgs e)
         {
+            //affiche le boutton pour passer au joueur suivant
             cmdNextPlayer.Visible = true;
             //TO DO Check if card or coins are selected, impossible to do both at the same time
             if ((nbDiamand != 0)||(nbOnyx != 0)||(nbRubis != 0)||(nbSaphir != 0)||(nbEmeraude != 0)||(CardSelected != null))
             {
+                //calcule le nombre de jetons total choisi
                 totCoinChoice = nbDiamand + nbOnyx + nbRubis + nbSaphir + nbEmeraude;
                 if ((CardSelected != null)&&(totCoinChoice == 0))
                 {
@@ -762,6 +808,7 @@ namespace Splendor
                     }
 
                 }
+
                 else if ((CardSelected != null) && (totCoinChoice == 0))
                 {
                     
@@ -790,7 +837,7 @@ namespace Splendor
                     }
                         
                 }
-                //deux fois
+                //affiche le nombre de jetons dans jeu du joueur 
                 lblPlayerRubisCoin.Text = playerList[currentPlayerId].Coins[0].ToString();
                 lblPlayerSaphirCoin.Text = playerList[currentPlayerId].Coins[1].ToString();
                 lblPlayerOnyxCoin.Text = playerList[currentPlayerId].Coins[2].ToString();
@@ -812,8 +859,9 @@ namespace Splendor
             
             if(nbPlayer<4)
             {
-                /// il faudrait faire un sous programe qui renvoie le nom du joueur !
+                // Ajoute un joueur
                 nbPlayer++;
+
                 if (nbPlayer >= 4)
                 {
                     cmdInsertPlayer.Enabled = false;
@@ -833,12 +881,14 @@ namespace Splendor
         /// <param name="e"></param>
         private void cmdNextPlayer_Click(object sender, EventArgs e)
         {
-            
+            //il incrémente l'id du joueur pour passer au suivant
             currentPlayerId++;
+            //si on arrive au dérnier joueur il revient au premier 
             if (currentPlayerId >= nbPlayer)
             {
                 currentPlayerId = 0;
             }
+            //il remet toutes les variables à 0 
             nbRubis=0;
             nbOnyx=0;
             nbEmeraude=0;
@@ -848,6 +898,7 @@ namespace Splendor
             cmdValidateChoice.Enabled = false;
             cmdNextPlayer.Visible = false;
             
+            //il charge le joueur suivant
             LoadPlayer(currentPlayerId);
 
         }
