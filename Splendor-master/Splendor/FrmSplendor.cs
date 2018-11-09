@@ -239,7 +239,7 @@ namespace Splendor
                 }
                 else
                 {
-                    if (strSource.Substring(Start, End - Start) == null)
+                    if (strSource.Substring(Start, End - Start)=="\t\t")
                     {
                         return "0";
                     }
@@ -434,7 +434,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblSaphirCoin.Text) - 1;
                                 lblSaphirCoin.Text = var.ToString();
                                 lblChoiceSaphir.Text = nbSaphir + "\r\n";
-                                playerList[currentPlayerId].Coins[1] += nbSaphir;
+
                                 cmdValidateChoice.Enabled = true;
                             }
 
@@ -488,7 +488,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblOnyxCoin.Text) - 1;
                                 lblOnyxCoin.Text = var.ToString();
                                 lblChoiceOnyx.Text = nbOnyx + "\r\n";
-                                playerList[currentPlayerId].Coins[2] += nbOnyx;
+
                                 cmdValidateChoice.Enabled = true;
                             }
                         }
@@ -540,7 +540,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblEmeraudeCoin.Text) - 1;
                                 lblEmeraudeCoin.Text = var.ToString();
                                 lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
-                                playerList[currentPlayerId].Coins[3] += nbEmeraude;
+
                                 cmdValidateChoice.Enabled = true;
                             }
                         }
@@ -593,7 +593,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblDiamandCoin.Text) - 1;
                                 lblDiamandCoin.Text = var.ToString();
                                 lblChoiceDiamand.Text = nbDiamand + "\r\n";
-                                playerList[currentPlayerId].Coins[4] += nbDiamand;
+
                                 cmdValidateChoice.Enabled = true;
                             }
                         }
@@ -673,9 +673,6 @@ namespace Splendor
                         }
                     }
 
-                    cmdValidateChoice.Enabled = false;
-                    cmdNextPlayer.Enabled = true;
-
                     //enlever les resources lors de l'achat
                     string txtCardSelected = txtPlayerBookedCard.Text;
                     int nbRubisNeededLess = Convert.ToInt32(getBetween(txtCardSelected, "Rubis", "\r\n"));
@@ -684,21 +681,47 @@ namespace Splendor
                     int nbEmeraudeNeededLess = Convert.ToInt32(getBetween(txtCardSelected, "Emeraude", "\r\n"));
                     int nbDiamandNeededLess = Convert.ToInt32(getBetween(txtCardSelected, "Diamand", "\r\n"));
 
+
                     nbRubisNeededLess -= playerList[currentPlayerId].Ressources[0];
-                    playerList[currentPlayerId].Coins[0] = (nbRubisNeededLess - playerList[currentPlayerId].Coins[0]) * -1;
-
+                    if (nbRubisNeededLess>=0)
+                    {
+                        playerList[currentPlayerId].Coins[0] = (nbRubisNeededLess - playerList[currentPlayerId].Coins[0]) * -1;
+                        int varRubisCalc = Convert.ToInt32(lblRubisCoin.Text) + nbRubisNeededLess;
+                        lblRubisCoin.Text = varRubisCalc.ToString();
+                    }
+                    
                     nbSaphirNeededLess -= playerList[currentPlayerId].Ressources[1];
-                    playerList[currentPlayerId].Coins[1] = (nbSaphirNeededLess - playerList[currentPlayerId].Coins[1]) * -1;
-
+                    if (nbSaphirNeededLess >= 0)
+                    {
+                        playerList[currentPlayerId].Coins[1] = (nbSaphirNeededLess - playerList[currentPlayerId].Coins[1]) * -1;
+                        int varSaphirCalc = Convert.ToInt32(lblSaphirCoin.Text) + nbSaphirNeededLess;
+                        lblSaphirCoin.Text = varSaphirCalc.ToString();
+                    }
+                    
                     nbOnyxNeededLess -= playerList[currentPlayerId].Ressources[2];
-                    playerList[currentPlayerId].Coins[2] = (nbOnyxNeededLess - playerList[currentPlayerId].Coins[2]) * -1;
-
+                    if (nbOnyxNeededLess >= 0)
+                    {
+                        playerList[currentPlayerId].Coins[2] = (nbOnyxNeededLess - playerList[currentPlayerId].Coins[2]) * -1;
+                        int varOnyxCalc = Convert.ToInt32(lblOnyxCoin.Text) + nbOnyxNeededLess;
+                        lblOnyxCoin.Text = varOnyxCalc.ToString();
+                    }
+                    
                     nbEmeraudeNeededLess -= playerList[currentPlayerId].Ressources[3];
-                    playerList[currentPlayerId].Coins[3] = (nbEmeraudeNeededLess - playerList[currentPlayerId].Coins[3]) * -1;
-
+                    if (nbEmeraudeNeededLess >= 0)
+                    {
+                        playerList[currentPlayerId].Coins[3] = (nbEmeraudeNeededLess - playerList[currentPlayerId].Coins[3]) * -1;
+                        int varEmeraudeCalc = Convert.ToInt32(lblEmeraudeCoin.Text) + nbEmeraudeNeededLess;
+                        lblEmeraudeCoin.Text = varEmeraudeCalc.ToString();
+                    }
+                    
                     nbDiamandNeededLess -= playerList[currentPlayerId].Ressources[4];
-                    playerList[currentPlayerId].Coins[4] = (nbDiamandNeededLess - playerList[currentPlayerId].Coins[4]) * -1;
-
+                    if (nbDiamandNeededLess >= 0)
+                    {
+                        playerList[currentPlayerId].Coins[4] = (nbDiamandNeededLess - playerList[currentPlayerId].Coins[4]) * -1;
+                        int varDiamandCalc = Convert.ToInt32(lblDiamandCoin.Text) + nbDiamandNeededLess;
+                        lblDiamandCoin.Text = varDiamandCalc.ToString();
+                    }
+                    
                     string txtCardSelectedSec = txtPlayerBookedCard.Text.Substring(0, txtPlayerBookedCard.Text.Length - (txtPlayerBookedCard.Text.Length - 4));
                     if (txtCardSelectedSec == "Rubi")
                     {
@@ -733,6 +756,8 @@ namespace Splendor
                     nbEmeraudePres = Convert.ToInt32(getBetween(tempBookedCard, "raude", "\r\n"));
                     nbDiamandPres = Convert.ToInt32(getBetween(tempBookedCard, "mand", "\r\n"));
 
+                    totPresPt += nbRubisPres + nbSaphirPres + nbOnyxPres + nbEmeraudePres + nbDiamandPres;
+
                     //otenir noble si assez de ressources
                     int nbRubisNeededNob = 0;
                     int nbSaphirNeededNob = 0;
@@ -750,7 +775,7 @@ namespace Splendor
 
                         if ((playerList[currentPlayerId].Ressources[0] >= nbRubisNeededNob) && (playerList[currentPlayerId].Ressources[1] >= nbSaphirNeededNob) && (playerList[currentPlayerId].Ressources[2] >= nbOnyxNeededNob) && (playerList[currentPlayerId].Ressources[3] >= nbEmeraudeNeededNob) && (playerList[currentPlayerId].Ressources[4] >= nbDiamandNeededNob))
                         {
-                            MessageBox.Show("Vous avez obtenu un noble\r\n" + txtNoble1);
+                            MessageBox.Show("Vous avez obtenu des points de perstige grâce à un noble");
                             txtNoble1.Text = listCardFor.Pop().ToString();
                         }
                         
@@ -767,7 +792,7 @@ namespace Splendor
 
                         if ((playerList[currentPlayerId].Ressources[0] >= nbRubisNeededNob) && (playerList[currentPlayerId].Ressources[1] >= nbSaphirNeededNob) && (playerList[currentPlayerId].Ressources[2] >= nbOnyxNeededNob) && (playerList[currentPlayerId].Ressources[3] >= nbEmeraudeNeededNob) && (playerList[currentPlayerId].Ressources[4] >= nbDiamandNeededNob))
                         {
-                            MessageBox.Show("Vous avez obtenu un noble\r\n" + txtNoble2);
+                            MessageBox.Show("Vous avez obtenu des points de perstige grâce à un noble");
                             txtNoble2.Text = listCardFor.Pop().ToString();
                         }
 
@@ -784,7 +809,7 @@ namespace Splendor
 
                         if ((playerList[currentPlayerId].Ressources[0] >= nbRubisNeededNob) && (playerList[currentPlayerId].Ressources[1] >= nbSaphirNeededNob) && (playerList[currentPlayerId].Ressources[2] >= nbOnyxNeededNob) && (playerList[currentPlayerId].Ressources[3] >= nbEmeraudeNeededNob) && (playerList[currentPlayerId].Ressources[4] >= nbDiamandNeededNob))
                         {
-                            MessageBox.Show("Vous avez obtenu un noble\r\n" + txtNoble3);
+                            MessageBox.Show("Vous avez obtenu des points de perstige grâce à un noble");
                             txtNoble3.Text = listCardFor.Pop().ToString();
                         }
 
@@ -801,15 +826,13 @@ namespace Splendor
 
                         if ((playerList[currentPlayerId].Ressources[0] >= nbRubisNeededNob) && (playerList[currentPlayerId].Ressources[1] >= nbSaphirNeededNob) && (playerList[currentPlayerId].Ressources[2] >= nbOnyxNeededNob) && (playerList[currentPlayerId].Ressources[3] >= nbEmeraudeNeededNob) && (playerList[currentPlayerId].Ressources[4] >= nbDiamandNeededNob))
                         {
-                            MessageBox.Show("Vous avez obtenu un noble\r\n" + txtNoble4);
+                            
+                            MessageBox.Show("Vous avez obtenu des points de perstige grâce à un noble");
                             txtNoble4.Text = listCardFor.Pop().ToString();
                         }
 
                     }
-
-
-
-                    totPresPt += nbRubisPres + nbSaphirPres + nbOnyxPres + nbEmeraudePres + nbDiamandPres;
+                    
                     playerList[currentPlayerId].NbPrestige = totPresPt;
                     lblNbPtPrestige.Text = totPresPt.ToString();
                     if (totPresPt >= 15)
@@ -821,37 +844,34 @@ namespace Splendor
                     cmdNextPlayer.Enabled = true;
 
                 }
-                else if ((CardSelected != null) && (totCoinChoice == 0))
+                //si on appuie sur valide et qu'on a une carte et des jetons de selectionné
+                else if ((CardSelected != null) && (totCoinChoice != 0))
                 {
+                    CardSelected = null;
+                    txtPlayerBookedCard.Text = "";
+                    nbDiamand = 0;
+                    lblChoiceDiamand.Text = "0";
+                    nbOnyx = 0;
+                    lblChoiceOnyx.Text = "0";
+                    nbRubis = 0;
+                    lblChoiceRubis.Text = "0";
+                    nbSaphir = 0;
+                    lblChoiceSaphir.Text = "0";
+                    nbEmeraude = 0;
+                    lblChoiceEmeraude.Text = "0";
+                    MessageBox.Show("Vous avez une carte et des jetons de séléctionné");
+                    cmdValidateChoice.Enabled = true;
+                    cmdNextPlayer.Enabled = false;
+                }
 
+                if ((CardSelected == null) && (totCoinChoice != 0))
+                {
                     cmdValidateChoice.Enabled = false;
                     cmdNextPlayer.Enabled = true;
                 }
-                else
-                {
-                    //si on appuie sur valide et qu'on a une carte et des jetons de selectionné
-                    if ((CardSelected != null) && (totCoinChoice != 0))
-                    {
-                        CardSelected = null;
-                        txtPlayerBookedCard.Text = "";
-                        nbDiamand = 0;
-                        lblChoiceDiamand.Text = "0";
-                        nbOnyx = 0;
-                        lblChoiceOnyx.Text = "0";
-                        nbRubis = 0;
-                        lblChoiceRubis.Text = "0";
-                        nbSaphir = 0;
-                        lblChoiceSaphir.Text = "0";
-                        nbEmeraude = 0;
-                        lblChoiceEmeraude.Text = "0";
-                        MessageBox.Show("Vous avez une carte et des jetons de séléctionné");
-                        cmdValidateChoice.Enabled = true;
-                        cmdNextPlayer.Enabled = false;
-                    }
 
-                }
-                //deux fois
-                playerList[currentPlayerId].Coins[0] += nbRubis;
+                    //deux fois
+                    playerList[currentPlayerId].Coins[0] += nbRubis;
                 playerList[currentPlayerId].Coins[1] += nbSaphir;
                 playerList[currentPlayerId].Coins[2] += nbOnyx;
                 playerList[currentPlayerId].Coins[3] += nbEmeraude;
@@ -863,8 +883,11 @@ namespace Splendor
                 lblPlayerEmeraudeCoin.Text = playerList[currentPlayerId].Coins[3].ToString();
                 lblPlayerDiamandCoin.Text = playerList[currentPlayerId].Coins[4].ToString();
 
-                
-
+                txtPlayerRubisCard.Text= playerList[currentPlayerId].Ressources[0].ToString();
+                txtPlayerSaphirCard.Text= playerList[currentPlayerId].Ressources[1].ToString();
+                txtPlayerOnyxCard.Text= playerList[currentPlayerId].Ressources[2].ToString();
+                txtPlayerEmeraudeCard.Text= playerList[currentPlayerId].Ressources[3].ToString();
+                txtPlayerDiamandCard.Text= playerList[currentPlayerId].Ressources[4].ToString();
 
             }
         }
@@ -887,7 +910,6 @@ namespace Splendor
                 }
                 NbCoinsFPlayer();
                 cmdDeletePlayer.Enabled = true;
-
 
                 lblNbPlayer.Text = nbPlayer.ToString();
             }
