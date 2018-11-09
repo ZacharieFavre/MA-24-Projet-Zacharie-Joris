@@ -77,7 +77,9 @@ namespace Splendor
                 id = value;
             }
         }
-
+        /// <summary>
+        /// Nuber of prestige point 
+        /// </summary>
         public int NbPrestige
         {
             get

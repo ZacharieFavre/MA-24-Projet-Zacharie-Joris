@@ -690,7 +690,7 @@ namespace Splendor
                 nbOnyxPres = Convert.ToInt32(getBetween(tempBookedCard, "x", "\r\n"));
                 nbEmeraudePres = Convert.ToInt32(getBetween(tempBookedCard, "raude", "\r\n"));
                 nbDiamandPres = Convert.ToInt32(getBetween(tempBookedCard, "mand", "\r\n"));
-
+                
                 totPresPt += nbRubisPres + nbSaphirPres + nbOnyxPres + nbEmeraudePres + nbDiamandPres;
                 playerList[currentPlayerId].NbPrestige = totPresPt;
                 lblNbPtPrestige.Text = totPresPt.ToString();
@@ -759,7 +759,11 @@ namespace Splendor
             LoadPlayer(currentPlayerId);
 
         }
-
+        /// <summary>
+        /// Click on the delete button to delete a player of the game 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmdDeletePlayer_Click(object sender, EventArgs e)
         {
             
