@@ -33,6 +33,7 @@ namespace Splendor
         private int nbEmeraude;
         private int nbDiamand;
         private int nbSaphir;
+        private int totCoinChoice;
         public int nbPlayer = 2;
 
         private int nbRubisNeeded;
@@ -383,7 +384,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblRubisCoin.Text) - 1;
                                 lblRubisCoin.Text = var.ToString();
                                 lblChoiceRubis.Text = nbRubis + "\r\n";
-                                playerList[currentPlayerId].Coins[0] = nbRubis;
+                                playerList[currentPlayerId].Coins[0] += nbRubis;
                                 cmdValidateChoice.Enabled = true;
 
                             }
@@ -437,7 +438,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblSaphirCoin.Text) - 1;
                                 lblSaphirCoin.Text = var.ToString();
                                 lblChoiceSaphir.Text = nbSaphir + "\r\n";
-                                playerList[currentPlayerId].Coins[1] = nbSaphir;
+                                playerList[currentPlayerId].Coins[1] += nbSaphir;
                                 cmdValidateChoice.Enabled = true;
                             }
 
@@ -490,7 +491,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblOnyxCoin.Text) - 1;
                                 lblOnyxCoin.Text = var.ToString();
                                 lblChoiceOnyx.Text = nbOnyx + "\r\n";
-                                playerList[currentPlayerId].Coins[2] = nbOnyx;
+                                playerList[currentPlayerId].Coins[2] += nbOnyx;
                                 cmdValidateChoice.Enabled = true;
                             }
                         }
@@ -542,7 +543,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblEmeraudeCoin.Text) - 1;
                                 lblEmeraudeCoin.Text = var.ToString();
                                 lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
-                                playerList[currentPlayerId].Coins[3] = nbEmeraude;
+                                playerList[currentPlayerId].Coins[3] += nbEmeraude;
                                 cmdValidateChoice.Enabled = true;
                             }
                         }
@@ -595,7 +596,7 @@ namespace Splendor
                                 int var = Convert.ToInt32(lblDiamandCoin.Text) - 1;
                                 lblDiamandCoin.Text = var.ToString();
                                 lblChoiceDiamand.Text = nbDiamand + "\r\n";
-                                playerList[currentPlayerId].Coins[4] = nbDiamand;
+                                playerList[currentPlayerId].Coins[4] += nbDiamand;
                                 cmdValidateChoice.Enabled = true;
                             }
                         }
@@ -620,7 +621,8 @@ namespace Splendor
             //TO DO Check if card or coins are selected, impossible to do both at the same time
             if ((nbDiamand != 0)||(nbOnyx != 0)||(nbRubis != 0)||(nbSaphir != 0)||(nbEmeraude != 0)||(CardSelected != null))
             {
-                if ((CardSelected != null)&&(nbDiamand+nbOnyx+nbRubis+nbSaphir+nbEmeraude==0))
+                totCoinChoice = nbDiamand + nbOnyx + nbRubis + nbSaphir + nbEmeraude;
+                if ((CardSelected != null)&&(totCoinChoice == 0))
                 {
                     int nbCardStack1 = listCardOne.Count;
                     int if1 = 0;
@@ -760,7 +762,7 @@ namespace Splendor
                     }
 
                 }
-                else if ((CardSelected != null) && (nbDiamand + nbOnyx + nbRubis + nbSaphir + nbEmeraude == 0))
+                else if ((CardSelected != null) && (totCoinChoice == 0))
                 {
                     
                     cmdValidateChoice.Enabled = false;
@@ -769,7 +771,7 @@ namespace Splendor
                 else
                 {
                     //si on appuie sur valide et qu'on a une carte et des jetons de selectionné
-                    if ((CardSelected != null) && (nbDiamand + nbOnyx + nbRubis + nbSaphir + nbEmeraude != 0))
+                    if ((CardSelected != null) && (totCoinChoice != 0))
                     {
                         CardSelected = null;
                         nbDiamand = 0;
