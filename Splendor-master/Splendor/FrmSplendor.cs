@@ -768,7 +768,7 @@ namespace Splendor
                 }
                 else
                 {
-                    //a faire deselectionner les jeton quand appuye sur une carte + deselectionner carte quand appuye sur jeton
+                    //si on appuie sur valide et qu'on a une carte et des jetons de selectionné
                     if ((CardSelected != null) && (nbDiamand + nbOnyx + nbRubis + nbSaphir + nbEmeraude != 0))
                     {
                         CardSelected = null;
@@ -831,12 +831,7 @@ namespace Splendor
         /// <param name="e"></param>
         private void cmdNextPlayer_Click(object sender, EventArgs e)
         {
-            //TO DO in release 1.0 : 3 is hard coded (number of players for the game), it shouldn't. 
-            //TO DO Get the id of the player : in release 0.1 there are only 3 players
-            //Reload the data of the player
-
-
-            //We are not allowed to click on the next button
+            
             currentPlayerId++;
             if (currentPlayerId >= nbPlayer)
             {
