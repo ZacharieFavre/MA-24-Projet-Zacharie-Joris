@@ -849,7 +849,11 @@ namespace Splendor
             LoadPlayer(currentPlayerId);
 
         }
-
+        /// <summary>
+        /// Click on the delete button to delete a player of the game 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmdDeletePlayer_Click(object sender, EventArgs e)
         {
             
