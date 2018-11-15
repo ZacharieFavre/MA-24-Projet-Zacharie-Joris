@@ -246,7 +246,7 @@
             // 
             // txtLevel11
             // 
-            this.txtLevel11.BackColor = System.Drawing.SystemColors.Window;
+            this.txtLevel11.BackColor = System.Drawing.SystemColors.Control;
             this.txtLevel11.Location = new System.Drawing.Point(108, 2);
             this.txtLevel11.Margin = new System.Windows.Forms.Padding(2);
             this.txtLevel11.Multiline = true;
