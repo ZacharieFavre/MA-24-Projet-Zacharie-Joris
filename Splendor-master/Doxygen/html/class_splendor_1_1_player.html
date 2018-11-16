@@ -9,14 +9,6 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(initResizable);
-/* @license-end */</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -32,7 +24,7 @@
    <div id="projectname">Splendor
    &#160;<span id="projectnumber">1.1</span>
    </div>
-   <div id="projectbrief">Card game Splendor</div>
+   <div id="projectbrief">card game</div>
   </td>
  </tr>
  </tbody>
@@ -55,23 +47,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('class_splendor_1_1_player.html','');});
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -86,6 +61,11 @@ $(document).ready(function(){initNavTree('class_splendor_1_1_player.html','');})
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_splendor.html">Splendor</a></li><li class="navelem"><a class="el" href="class_splendor_1_1_player.html">Player</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#properties">Properties</a> &#124;
@@ -112,8 +92,8 @@ Properties</h2></td></tr>
 <tr class="memitem:a5616e3562be3e8800f9e959e7cf75194"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_splendor_1_1_player.html#a5616e3562be3e8800f9e959e7cf75194">Id</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:a5616e3562be3e8800f9e959e7cf75194"><td class="mdescLeft">&#160;</td><td class="mdescRight">id of the player  <a href="#a5616e3562be3e8800f9e959e7cf75194">More...</a><br /></td></tr>
 <tr class="separator:a5616e3562be3e8800f9e959e7cf75194"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad92459d327fa7cc546259931af417aa1"><td class="memItemLeft" align="right" valign="top"><a id="ad92459d327fa7cc546259931af417aa1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>NbPrestige</b><code> [get, set]</code></td></tr>
+<tr class="memitem:ad92459d327fa7cc546259931af417aa1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_splendor_1_1_player.html#ad92459d327fa7cc546259931af417aa1">NbPrestige</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:ad92459d327fa7cc546259931af417aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuber of prestige point  <a href="#ad92459d327fa7cc546259931af417aa1">More...</a><br /></td></tr>
 <tr class="separator:ad92459d327fa7cc546259931af417aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -191,6 +171,30 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NbPrestige</b><code> [
 
 </div>
 </div>
+<a id="ad92459d327fa7cc546259931af417aa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad92459d327fa7cc546259931af417aa1">&#9670;&nbsp;</a></span>NbPrestige</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Splendor.Player.NbPrestige</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Nuber of prestige point </p>
+
+</div>
+</div>
 <a id="a1c5ccd2470e3bbc84e9a156bc323bfd0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1c5ccd2470e3bbc84e9a156bc323bfd0">&#9670;&nbsp;</a></span>Ressources</h2>
 
@@ -216,18 +220,14 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>NbPrestige</b><code> [
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Splendor/Player.cs</li>
+<li>MA-24-Projet-Zacharie-Joris/Splendor-master/Splendor/Player.cs</li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="namespace_splendor.html">Splendor</a></li><li class="navelem"><a class="el" href="class_splendor_1_1_player.html">Player</a></li>
-    <li class="footer">Generated by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
 </body>
 </html>
