@@ -16,6 +16,7 @@ namespace Splendor
         private int id;
         private int[] ressources;
         private int[] coins;
+        private int nbPrestige;
 
         /// <summary>
         /// name of the player
@@ -76,7 +77,19 @@ namespace Splendor
                 id = value;
             }
         }
-
-
+        /// <summary>
+        /// Nuber of prestige point 
+        /// </summary>
+        public int NbPrestige
+        {
+            get
+            {
+                return nbPrestige;
+            }
+            set
+            {
+                nbPrestige = value;
+            }
+        }
     }
 }
